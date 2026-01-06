@@ -18,6 +18,7 @@ env:
 
 jobs:
   check-update:
+    if: vars.AUTO_UPDATE_ENABLED == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write
