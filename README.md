@@ -3,7 +3,7 @@
 # Blazor.Icons.Tabler
 [![NuGet Version](https://img.shields.io/nuget/v/Kebechet.Blazor.Icons.Tabler)](https://www.nuget.org/packages/Kebechet.Blazor.Icons.Tabler/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Kebechet.Blazor.Icons.Tabler)](https://www.nuget.org/packages/Kebechet.Blazor.Icons.Tabler/)
-[![CI](https://github.com/Kebechet/Blazor.Icons.Tabler/actions/workflows/ci.yml/badge.svg)](https://github.com/Kebechet/Blazor.Icons.Tabler/actions/workflows/ci.yml)
+[![Auto Update](https://github.com/Kebechet/Blazor.Icons.Tabler/actions/workflows/check-tabler-update.yml/badge.svg)](https://github.com/Kebechet/Blazor.Icons.Tabler/actions/workflows/check-tabler-update.yml)
 ![Last updated](https://img.shields.io/github/last-commit/Kebechet/Blazor.Icons.Tabler/main?label=last%20updated)
 [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/samuel_sidor.svg?style=social&label=Follow%20samuel_sidor)](https://x.com/samuel_sidor)
 
