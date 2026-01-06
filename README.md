@@ -9,6 +9,8 @@
 
 A Blazor component library providing [Tabler Icons](https://tabler.io/icons) (5000+ icons) with strongly-typed enums and constant-time lookups.
 
+**Automatically updated** - A daily pipeline checks for new Tabler Icons releases and publishes updates automatically. No manual maintenance needed!
+
 ## Installation
 
 ```bash
