@@ -11,14 +11,14 @@
     5. Generates TablerIconExtensions class with switch expression
 
 .PARAMETER OutputPath
-    The output directory for generated C# files. Defaults to ../src/Blazor.Icons.Tabler
+    The output directory for generated C# files. Defaults to ../src/Blazor.Tabler.Icons
 
 .EXAMPLE
     .\Generate-TablerIcons.ps1
 #>
 
 param(
-    [string]$OutputPath = "$PSScriptRoot\..\src\Blazor.Icons.Tabler"
+    [string]$OutputPath = "$PSScriptRoot\..\src\Blazor.Tabler.Icons"
 )
 
 $ErrorActionPreference = "Stop"
@@ -148,7 +148,7 @@ try {
     Write-Host "Generating C# files..."
 
     $enumBuilder = [System.Text.StringBuilder]::new()
-    [void]$enumBuilder.AppendLine("namespace Blazor.Icons.Tabler;")
+    [void]$enumBuilder.AppendLine("namespace Blazor.Tabler.Icons;")
     [void]$enumBuilder.AppendLine()
     [void]$enumBuilder.AppendLine("/// <summary>")
     [void]$enumBuilder.AppendLine("/// Enumeration of all available Tabler icons.")
@@ -169,7 +169,7 @@ try {
     [void]$enumBuilder.AppendLine("}")
 
     $constantsBuilder = [System.Text.StringBuilder]::new()
-    [void]$constantsBuilder.AppendLine("namespace Blazor.Icons.Tabler;")
+    [void]$constantsBuilder.AppendLine("namespace Blazor.Tabler.Icons;")
     [void]$constantsBuilder.AppendLine()
     [void]$constantsBuilder.AppendLine("/// <summary>")
     [void]$constantsBuilder.AppendLine("/// CSS class constants for Tabler icons.")
@@ -184,7 +184,7 @@ try {
     [void]$constantsBuilder.AppendLine("}")
 
     $extensionBuilder = [System.Text.StringBuilder]::new()
-    [void]$extensionBuilder.AppendLine("namespace Blazor.Icons.Tabler;")
+    [void]$extensionBuilder.AppendLine("namespace Blazor.Tabler.Icons;")
     [void]$extensionBuilder.AppendLine()
     [void]$extensionBuilder.AppendLine("/// <summary>")
     [void]$extensionBuilder.AppendLine("/// Extension methods for <see cref=`"TablerIconType`"/>.")

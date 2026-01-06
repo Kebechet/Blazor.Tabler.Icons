@@ -9,7 +9,7 @@
   <PropertyGroup Label="NugetProperties">
     <Authors>Kebechet</Authors>
     <IsPackable>true</IsPackable>
-    <PackageId>Kebechet.Blazor.Icons.Tabler</PackageId>
+    <PackageId>Kebechet.Blazor.Tabler.Icons</PackageId>
     <Description>Tabler Icons for Blazor with strongly-typed enums, constants, and O(1) lookups. 5000+ icons included. Automatically updated when new Tabler Icons are released.</Description>
     <RepositoryUrl>https://github.com/Kebechet/Blazor.Icons.Tabler</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Kebechet/Blazor.Icons.Tabler</PackageProjectUrl>

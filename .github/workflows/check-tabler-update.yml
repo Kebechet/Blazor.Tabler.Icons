@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
 
 env:
-  PROJECT_PATH: src/Blazor.Icons.Tabler/Blazor.Icons.Tabler.csproj
+  PROJECT_PATH: src/Blazor.Tabler.Icons/Blazor.Tabler.Icons.csproj
   SCRIPT_PATH: scripts/Generate-TablerIcons.ps1
-  PACKAGE_NAME: Kebechet.Blazor.Icons.Tabler
+  PACKAGE_NAME: Kebechet.Blazor.Tabler.Icons
   DOTNET_VERSION: '10.0.x'
   BUILD_CONFIGURATION: Release
   OUTPUT_PATH: ./nupkg

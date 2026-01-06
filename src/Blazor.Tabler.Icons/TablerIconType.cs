@@ -1,4 +1,4 @@
-﻿namespace Blazor.Icons.Tabler;
+﻿namespace Blazor.Tabler.Icons;
 
 /// <summary>
 /// Enumeration of all available Tabler icons.

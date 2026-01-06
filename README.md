@@ -1,8 +1,8 @@
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/kebechet)
 
 # Blazor.Icons.Tabler
-[![NuGet Version](https://img.shields.io/nuget/v/Kebechet.Blazor.Icons.Tabler)](https://www.nuget.org/packages/Kebechet.Blazor.Icons.Tabler/)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/Kebechet.Blazor.Icons.Tabler)](https://www.nuget.org/packages/Kebechet.Blazor.Icons.Tabler/)
+[![NuGet Version](https://img.shields.io/nuget/v/Kebechet.Blazor.Tabler.Icons)](https://www.nuget.org/packages/Kebechet.Blazor.Tabler.Icons/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Kebechet.Blazor.Tabler.Icons)](https://www.nuget.org/packages/Kebechet.Blazor.Tabler.Icons/)
 [![Auto Update](https://github.com/Kebechet/Blazor.Icons.Tabler/actions/workflows/check-tabler-update.yml/badge.svg)](https://github.com/Kebechet/Blazor.Icons.Tabler/actions/workflows/check-tabler-update.yml)
 ![Last updated](https://img.shields.io/github/last-commit/Kebechet/Blazor.Icons.Tabler/main?label=last%20updated)
 [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/samuel_sidor.svg?style=social&label=Follow%20samuel_sidor)](https://x.com/samuel_sidor)
@@ -14,7 +14,7 @@ A Blazor component library providing [Tabler Icons](https://tabler.io/icons) (50
 ## Installation
 
 ```bash
-dotnet add package Kebechet.Blazor.Icons.Tabler
+dotnet add package Kebechet.Blazor.Tabler.Icons
 ```
 
 The CSS is **automatically registered** via Blazor's JavaScript initializers - no manual setup required.

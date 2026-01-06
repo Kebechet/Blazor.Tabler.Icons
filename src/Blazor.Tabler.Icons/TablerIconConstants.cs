@@ -1,4 +1,4 @@
-﻿namespace Blazor.Icons.Tabler;
+﻿namespace Blazor.Tabler.Icons;
 
 /// <summary>
 /// CSS class constants for Tabler icons.

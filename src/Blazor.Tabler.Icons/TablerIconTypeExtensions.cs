@@ -1,4 +1,4 @@
-﻿namespace Blazor.Icons.Tabler;
+﻿namespace Blazor.Tabler.Icons;
 
 /// <summary>
 /// Extension methods for <see cref="TablerIconType"/>.
