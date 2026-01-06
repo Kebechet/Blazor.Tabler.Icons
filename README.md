@@ -126,9 +126,6 @@ Examples:
 - `3.36.1` - matches Tabler Icons v3.36.1
 - `3.36.1.1` - patch release for package-level fixes
 
-## Future Plans
-
-- CDN option as separate package
 ## License
 
 MIT - Same as Tabler Icons
