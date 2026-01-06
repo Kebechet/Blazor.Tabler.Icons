@@ -5,8 +5,8 @@
 .DESCRIPTION
     This script:
     1. Downloads the latest @tabler/icons-webfont npm package
-    2. Extracts icon names from the CSS file
-    3. Generates TablerIcon enum
+    2. Extracts icon names from both outline and filled CSS files
+    3. Generates TablerIcon enum (with Filled suffix for filled icons)
     4. Generates TablerIconConstants class
     5. Generates TablerIconExtensions class with switch expression
 
@@ -105,6 +105,34 @@ function Expand-TarGz {
     Remove-Item $tarPath -Force
 }
 
+function Parse-IconsCss {
+    param(
+        [string]$CssPath,
+        [string]$Suffix = ""
+    )
+
+    $cssContent = Get-Content $CssPath -Raw
+    $icons = @{}
+    $pattern = '\.ti-([a-z0-9-]+):before\s*\{\s*content:\s*"\\([a-fA-F0-9]+)"'
+    $matches = [regex]::Matches($cssContent, $pattern)
+
+    foreach ($match in $matches) {
+        $iconName = $match.Groups[1].Value
+        $unicode = $match.Groups[2].Value
+
+        if ($iconName -ne "ti") {
+            $key = $iconName + $Suffix
+            $icons[$key] = @{
+                OriginalName = $iconName
+                Unicode = $unicode
+                IsFilled = ($Suffix -eq "-filled")
+            }
+        }
+    }
+
+    return $icons
+}
+
 try {
     Write-Host "Creating temp directory: $tempDir"
     New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
@@ -116,42 +144,52 @@ try {
     Write-Host "Extracting archive..."
     Expand-TarGz -ArchivePath $tarballPath -DestinationPath $tempDir
 
-    $cssFile = Get-ChildItem -Path $tempDir -Recurse -Filter "tabler-icons.css" | Select-Object -First 1
-    if (-not $cssFile) {
+    # Parse outline icons
+    $outlineCssFile = Get-ChildItem -Path $tempDir -Recurse -Filter "tabler-icons.css" | Where-Object { $_.Name -eq "tabler-icons.css" } | Select-Object -First 1
+    if (-not $outlineCssFile) {
         throw "Could not find tabler-icons.css in the extracted package"
     }
 
-    Write-Host "Parsing CSS file: $($cssFile.FullName)"
-    $cssContent = Get-Content $cssFile.FullName -Raw
+    Write-Host "Parsing outline CSS file: $($outlineCssFile.FullName)"
+    $outlineIcons = Parse-IconsCss -CssPath $outlineCssFile.FullName
+    Write-Host "Found $($outlineIcons.Count) outline icons"
 
-    $icons = @{}
-    $pattern = '\.ti-([a-z0-9-]+):before\s*\{\s*content:\s*"\\([a-fA-F0-9]+)"'
-    $matches = [regex]::Matches($cssContent, $pattern)
-
-    foreach ($match in $matches) {
-        $iconName = $match.Groups[1].Value
-        $unicode = $match.Groups[2].Value
-
-        if ($iconName -ne "ti") {
-            $icons[$iconName] = $unicode
-        }
+    # Parse filled icons
+    $filledCssFile = Get-ChildItem -Path $tempDir -Recurse -Filter "tabler-icons-filled.css" | Select-Object -First 1
+    if (-not $filledCssFile) {
+        throw "Could not find tabler-icons-filled.css in the extracted package"
     }
 
-    Write-Host "Found $($icons.Count) icons"
+    Write-Host "Parsing filled CSS file: $($filledCssFile.FullName)"
+    $filledIcons = Parse-IconsCss -CssPath $filledCssFile.FullName -Suffix "-filled"
+    Write-Host "Found $($filledIcons.Count) filled icons"
 
-    if ($icons.Count -eq 0) {
-        throw "No icons found in CSS file"
+    # Merge all icons
+    $allIcons = @{}
+    foreach ($key in $outlineIcons.Keys) {
+        $allIcons[$key] = $outlineIcons[$key]
+    }
+    foreach ($key in $filledIcons.Keys) {
+        $allIcons[$key] = $filledIcons[$key]
     }
 
-    $sortedIcons = $icons.GetEnumerator() | Sort-Object Name
+    $totalCount = $allIcons.Count
+    Write-Host "Total icons: $totalCount"
+
+    if ($totalCount -eq 0) {
+        throw "No icons found in CSS files"
+    }
+
+    $sortedIcons = $allIcons.GetEnumerator() | Sort-Object Name
 
     Write-Host "Generating C# files..."
 
+    # Generate enum
     $enumBuilder = [System.Text.StringBuilder]::new()
     [void]$enumBuilder.AppendLine("namespace Blazor.Tabler.Icons;")
     [void]$enumBuilder.AppendLine()
     [void]$enumBuilder.AppendLine("/// <summary>")
-    [void]$enumBuilder.AppendLine("/// Enumeration of all available Tabler icons.")
+    [void]$enumBuilder.AppendLine("/// Enumeration of all available Tabler icons (outline and filled variants).")
     [void]$enumBuilder.AppendLine("/// </summary>")
     [void]$enumBuilder.AppendLine("public enum TablerIconType")
     [void]$enumBuilder.AppendLine("{")
@@ -168,6 +206,7 @@ try {
     [void]$enumBuilder.AppendLine()
     [void]$enumBuilder.AppendLine("}")
 
+    # Generate constants
     $constantsBuilder = [System.Text.StringBuilder]::new()
     [void]$constantsBuilder.AppendLine("namespace Blazor.Tabler.Icons;")
     [void]$constantsBuilder.AppendLine()
@@ -179,10 +218,17 @@ try {
 
     foreach ($icon in $sortedIcons) {
         $pascalName = ConvertTo-PascalCase $icon.Name
-        [void]$constantsBuilder.AppendLine("    public const string $pascalName = `"ti ti-$($icon.Name)`";")
+        $originalName = $icon.Value.OriginalName
+        $isFilled = $icon.Value.IsFilled
+        if ($isFilled) {
+            [void]$constantsBuilder.AppendLine("    public const string $pascalName = `"tif tif-$originalName`";")
+        } else {
+            [void]$constantsBuilder.AppendLine("    public const string $pascalName = `"ti ti-$originalName`";")
+        }
     }
     [void]$constantsBuilder.AppendLine("}")
 
+    # Generate extension methods
     $extensionBuilder = [System.Text.StringBuilder]::new()
     [void]$extensionBuilder.AppendLine("namespace Blazor.Tabler.Icons;")
     [void]$extensionBuilder.AppendLine()
@@ -224,7 +270,8 @@ try {
     $fontsDir = Join-Path $wwwrootDir "fonts"
     New-Item -ItemType Directory -Path $fontsDir -Force | Out-Null
 
-    $minCssSource = Get-ChildItem -Path $tempDir -Recurse -Filter "tabler-icons.min.css" | Select-Object -First 1
+    # Copy and process outline CSS
+    $minCssSource = Get-ChildItem -Path $tempDir -Recurse -Filter "tabler-icons.min.css" | Where-Object { $_.Name -eq "tabler-icons.min.css" } | Select-Object -First 1
     if ($minCssSource) {
         $minCssContent = Get-Content $minCssSource.FullName -Raw
         $minCssContent = $minCssContent -replace '\.\./fonts/', 'fonts/'
@@ -232,6 +279,20 @@ try {
         $minCssContent = $minCssContent -replace ',url\("[^"]+\.ttf[^"]*"\)\s*format\("truetype"\)', ''
         $minCssContent | Out-File -FilePath (Join-Path $wwwrootDir "tabler-icons.min.css") -Encoding UTF8 -NoNewline
         Write-Host "  - Copied tabler-icons.min.css"
+    }
+
+    # Copy and process filled CSS
+    $filledMinCssSource = Get-ChildItem -Path $tempDir -Recurse -Filter "tabler-icons-filled.min.css" | Select-Object -First 1
+    if ($filledMinCssSource) {
+        $filledMinCssContent = Get-Content $filledMinCssSource.FullName -Raw
+        $filledMinCssContent = $filledMinCssContent -replace '\.\./fonts/', 'fonts/'
+        $filledMinCssContent = $filledMinCssContent -replace ',url\("[^"]+\.woff\?[^"]*"\)\s*format\("woff"\)', ''
+        $filledMinCssContent = $filledMinCssContent -replace ',url\("[^"]+\.ttf[^"]*"\)\s*format\("truetype"\)', ''
+        # Change .ti to .tif for filled icons (base class and icon class selectors only)
+        $filledMinCssContent = $filledMinCssContent -replace '\.ti\{', '.tif{'
+        $filledMinCssContent = $filledMinCssContent -replace '\.ti-([a-z0-9-]+):before', '.tif-$1:before'
+        $filledMinCssContent | Out-File -FilePath (Join-Path $wwwrootDir "tabler-icons-filled.min.css") -Encoding UTF8 -NoNewline
+        Write-Host "  - Copied tabler-icons-filled.min.css"
     }
 
     $fontFiles = Get-ChildItem -Path $tempDir -Recurse -Include "tabler-icons.woff2", "tabler-icons-filled.woff2"
@@ -246,7 +307,7 @@ try {
     Write-Host "  - $constantsPath"
     Write-Host "  - $extensionPath"
     Write-Host ""
-    Write-Host "Done! Generated $($icons.Count) icons."
+    Write-Host "Done! Generated $totalCount icons ($($outlineIcons.Count) outline + $($filledIcons.Count) filled)."
 }
 finally {
     if (Test-Path $tempDir) {
