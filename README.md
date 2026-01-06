@@ -129,8 +129,6 @@ Examples:
 ## Future Plans
 
 - CDN option as separate package
-- Automated pipeline to check for new Tabler versions daily
-
 ## License
 
 MIT - Same as Tabler Icons

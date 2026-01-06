@@ -1,0 +1,119 @@
+name: Check Tabler Icons Update
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 6 AM UTC
+  workflow_dispatch:
+
+env:
+  PROJECT_PATH: src/Blazor.Icons.Tabler/Blazor.Icons.Tabler.csproj
+  SCRIPT_PATH: scripts/Generate-TablerIcons.ps1
+  PACKAGE_NAME: Kebechet.Blazor.Icons.Tabler
+  DOTNET_VERSION: '10.0.x'
+  BUILD_CONFIGURATION: Release
+  OUTPUT_PATH: ./nupkg
+  NPM_PACKAGE: '@tabler/icons-webfont'
+  NPM_REGISTRY: https://registry.npmjs.org
+  NUGET_SOURCE: https://api.nuget.org/v3/index.json
+
+jobs:
+  check-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get current version from csproj
+        id: current
+        run: |
+          CURRENT_VERSION=$(grep -oP '(?<=<Version>)[^<-]+' ${{ env.PROJECT_PATH }} | head -1)
+          echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          echo "Current version: $CURRENT_VERSION"
+
+      - name: Get latest Tabler version from npm
+        id: latest
+        run: |
+          LATEST_VERSION=$(curl -s ${{ env.NPM_REGISTRY }}/${{ env.NPM_PACKAGE }}/latest | jq -r '.version')
+          echo "version=$LATEST_VERSION" >> $GITHUB_OUTPUT
+          echo "Latest Tabler version: $LATEST_VERSION"
+
+      - name: Check if update needed
+        id: check
+        run: |
+          if [ "${{ steps.current.outputs.version }}" != "${{ steps.latest.outputs.version }}" ]; then
+            echo "update_needed=true" >> $GITHUB_OUTPUT
+            echo "Update needed: ${{ steps.current.outputs.version }} -> ${{ steps.latest.outputs.version }}"
+          else
+            echo "update_needed=false" >> $GITHUB_OUTPUT
+            echo "Already up to date"
+          fi
+
+      - name: Setup .NET
+        if: steps.check.outputs.update_needed == 'true'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Update script version
+        if: steps.check.outputs.update_needed == 'true'
+        run: |
+          sed -i "s|icons-webfont-[0-9.]*\.tgz|icons-webfont-${{ steps.latest.outputs.version }}.tgz|" ${{ env.SCRIPT_PATH }}
+
+      - name: Run generation script
+        if: steps.check.outputs.update_needed == 'true'
+        shell: pwsh
+        run: ./${{ env.SCRIPT_PATH }}
+
+      - name: Update csproj version
+        if: steps.check.outputs.update_needed == 'true'
+        run: |
+          sed -i "s|<Version>.*</Version>|<Version>${{ steps.latest.outputs.version }}</Version>|" ${{ env.PROJECT_PATH }}
+
+      - name: Build
+        if: steps.check.outputs.update_needed == 'true'
+        run: dotnet build ${{ env.PROJECT_PATH }} --configuration ${{ env.BUILD_CONFIGURATION }}
+
+      - name: Pack
+        if: steps.check.outputs.update_needed == 'true'
+        run: dotnet pack ${{ env.PROJECT_PATH }} --configuration ${{ env.BUILD_CONFIGURATION }} --no-build --output ${{ env.OUTPUT_PATH }}
+
+      - name: Commit and push
+        if: steps.check.outputs.update_needed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Update Tabler Icons to v${{ steps.latest.outputs.version }}"
+          git push
+
+      - name: Publish to NuGet
+        if: steps.check.outputs.update_needed == 'true'
+        run: dotnet nuget push ${{ env.OUTPUT_PATH }}/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source ${{ env.NUGET_SOURCE }} --skip-duplicate
+
+      - name: Publish to GitHub Packages
+        if: steps.check.outputs.update_needed == 'true'
+        run: dotnet nuget push ${{ env.OUTPUT_PATH }}/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
+
+      - name: Create GitHub Release
+        if: steps.check.outputs.update_needed == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.latest.outputs.version }}
+          name: v${{ steps.latest.outputs.version }}
+          body: |
+            ## ${{ env.PACKAGE_NAME }} v${{ steps.latest.outputs.version }}
+
+            Automated update to Tabler Icons v${{ steps.latest.outputs.version }}
+
+            ### Installation
+            ```bash
+            dotnet add package ${{ env.PACKAGE_NAME }} --version ${{ steps.latest.outputs.version }}
+            ```
+
+            ### Links
+            - [NuGet Package](https://www.nuget.org/packages/${{ env.PACKAGE_NAME }}/${{ steps.latest.outputs.version }})
+            - [Tabler Icons v${{ steps.latest.outputs.version }}](https://github.com/tabler/tabler-icons/releases/tag/v${{ steps.latest.outputs.version }})
+          files: ${{ env.OUTPUT_PATH }}/*.nupkg
