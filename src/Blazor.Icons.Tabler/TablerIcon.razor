@@ -1,0 +1,19 @@
+<i class="@CssClass" style="@Style" @attributes="@Attributes"></i>
+
+@code {
+    [Parameter, EditorRequired]
+    public TablerIconType Type { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter]
+    public string? Style { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? Attributes { get; set; }
+
+    private string CssClass => string.IsNullOrEmpty(Class)
+        ? Type.ToCssClass()
+        : $"{Type.ToCssClass()} {Class}";
+}
