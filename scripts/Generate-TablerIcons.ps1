@@ -23,7 +23,8 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$tempDir = Join-Path $env:TEMP "tabler-icons-$(Get-Date -Format 'yyyyMMddHHmmss')"
+$tempBase = [System.IO.Path]::GetTempPath()
+$tempDir = Join-Path $tempBase "tabler-icons-$(Get-Date -Format 'yyyyMMddHHmmss')"
 $tarballUrl = "https://registry.npmjs.org/@tabler/icons-webfont/-/icons-webfont-3.36.1.tgz"
 
 function ConvertTo-PascalCase {
