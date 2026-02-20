@@ -19,7 +19,7 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>3.36.2</Version>
+    <Version>3.37.1</Version>
     <PackageReleaseNotes>Enabled XML documentation generation for IntelliSense support</PackageReleaseNotes>
   </PropertyGroup>
 
