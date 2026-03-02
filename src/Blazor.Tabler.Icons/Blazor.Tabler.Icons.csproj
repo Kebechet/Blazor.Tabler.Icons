@@ -20,7 +20,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <Version>3.38.0</Version>
-    <PackageReleaseNotes>Enabled XML documentation generation for IntelliSense support</PackageReleaseNotes>
+    <PackageReleaseNotes>Bumped to Tabler Icons v3.38.0</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
