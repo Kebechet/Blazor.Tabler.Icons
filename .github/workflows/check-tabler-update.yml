@@ -79,6 +79,11 @@ jobs:
         run: |
           sed -i "s|<Version>.*</Version>|<Version>${{ steps.latest.outputs.version }}</Version>|" ${{ env.PROJECT_PATH }}
 
+      - name: Update release notes
+        if: steps.check.outputs.update_needed == 'true'
+        run: |
+          sed -i "s|<PackageReleaseNotes>.*</PackageReleaseNotes>|<PackageReleaseNotes>Bumped to Tabler Icons v${{ steps.latest.outputs.version }}</PackageReleaseNotes>|" ${{ env.PROJECT_PATH }}
+
       - name: Build
         if: steps.check.outputs.update_needed == 'true'
         run: dotnet build ${{ env.PROJECT_PATH }} --configuration ${{ env.BUILD_CONFIGURATION }}
