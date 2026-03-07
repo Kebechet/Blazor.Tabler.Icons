@@ -19,8 +19,8 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>3.39.0</Version>
-    <PackageReleaseNotes>Bumped to Tabler Icons v3.39.0</PackageReleaseNotes>
+    <Version>3.40.0</Version>
+    <PackageReleaseNotes>Bumped to Tabler Icons v3.40.0</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
