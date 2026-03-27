@@ -977,6 +977,7 @@ public static class TablerIconConstants
     public const string BrandIntercom = "ti ti-brand-intercom";
     public const string BrandItch = "ti ti-brand-itch";
     public const string BrandJavascript = "ti ti-brand-javascript";
+    public const string BrandJira = "ti ti-brand-jira";
     public const string BrandJuejin = "ti ti-brand-juejin";
     public const string BrandKakoTalk = "ti ti-brand-kako-talk";
     public const string BrandKbin = "ti ti-brand-kbin";
@@ -1410,6 +1411,8 @@ public static class TablerIconConstants
     public const string CarFilled = "tif tif-car";
     public const string CarGarage = "ti ti-car-garage";
     public const string CarOff = "ti ti-car-off";
+    public const string CarOffRoad = "ti ti-car-off-road";
+    public const string CarSuspension = "ti ti-car-suspension";
     public const string CarSuv = "ti ti-car-suv";
     public const string CarSuvFilled = "tif tif-car-suv";
     public const string CarTurbine = "ti ti-car-turbine";
@@ -2098,6 +2101,7 @@ public static class TablerIconConstants
     public const string CreativeCommonsZero = "ti ti-creative-commons-zero";
     public const string CreditCard = "ti ti-credit-card";
     public const string CreditCardFilled = "tif tif-credit-card";
+    public const string CreditCardHand = "ti ti-credit-card-hand";
     public const string CreditCardOff = "ti ti-credit-card-off";
     public const string CreditCardPay = "ti ti-credit-card-pay";
     public const string CreditCardRefund = "ti ti-credit-card-refund";
@@ -2249,6 +2253,8 @@ public static class TablerIconConstants
     public const string Desk = "ti ti-desk";
     public const string Details = "ti ti-details";
     public const string DetailsOff = "ti ti-details-off";
+    public const string Device3dCamera = "ti ti-device-3d-camera";
+    public const string Device3dLens = "ti ti-device-3d-lens";
     public const string DeviceAirpods = "ti ti-device-airpods";
     public const string DeviceAirpodsCase = "ti ti-device-airpods-case";
     public const string DeviceAirtag = "ti ti-device-airtag";
@@ -2392,6 +2398,7 @@ public static class TablerIconConstants
     public const string DeviceProjector = "ti ti-device-projector";
     public const string DeviceRemote = "ti ti-device-remote";
     public const string DeviceRemoteFilled = "tif tif-device-remote";
+    public const string DeviceScreen = "ti ti-device-screen";
     public const string DeviceSdCard = "ti ti-device-sd-card";
     public const string DeviceSim = "ti ti-device-sim";
     public const string DeviceSim1 = "ti ti-device-sim-1";
@@ -3411,6 +3418,7 @@ public static class TablerIconConstants
     public const string IceCream2 = "ti ti-ice-cream-2";
     public const string IceCreamOff = "ti ti-ice-cream-off";
     public const string IceSkating = "ti ti-ice-skating";
+    public const string Iceberg = "ti ti-iceberg";
     public const string Icons = "ti ti-icons";
     public const string IconsFilled = "tif tif-icons";
     public const string IconsOff = "ti ti-icons-off";
@@ -3483,6 +3491,7 @@ public static class TablerIconConstants
     public const string Jacket = "ti ti-jacket";
     public const string Jetpack = "ti ti-jetpack";
     public const string JetpackFilled = "tif tif-jetpack";
+    public const string Jetski = "ti ti-jetski";
     public const string JewishStar = "ti ti-jewish-star";
     public const string JewishStarFilled = "tif tif-jewish-star";
     public const string JoinBevel = "ti ti-join-bevel";
@@ -4398,6 +4407,7 @@ public static class TablerIconConstants
     public const string OctahedronOff = "ti ti-octahedron-off";
     public const string OctahedronPlus = "ti ti-octahedron-plus";
     public const string Old = "ti ti-old";
+    public const string OlympicTorch = "ti ti-olympic-torch";
     public const string Olympics = "ti ti-olympics";
     public const string OlympicsOff = "ti ti-olympics-off";
     public const string Om = "ti ti-om";
@@ -4440,6 +4450,7 @@ public static class TablerIconConstants
     public const string Parking = "ti ti-parking";
     public const string ParkingCircle = "ti ti-parking-circle";
     public const string ParkingCircleFilled = "tif tif-parking-circle";
+    public const string ParkingMeter = "ti ti-parking-meter";
     public const string ParkingOff = "ti ti-parking-off";
     public const string Password = "ti ti-password";
     public const string PasswordFingerprint = "ti ti-password-fingerprint";
@@ -4594,6 +4605,7 @@ public static class TablerIconConstants
     public const string Pill = "ti ti-pill";
     public const string PillFilled = "tif tif-pill";
     public const string PillOff = "ti ti-pill-off";
+    public const string Pillow = "ti ti-pillow";
     public const string Pills = "ti ti-pills";
     public const string Pin = "ti ti-pin";
     public const string PinEnd = "ti ti-pin-end";
@@ -4603,6 +4615,7 @@ public static class TablerIconConstants
     public const string Pinned = "ti ti-pinned";
     public const string PinnedFilled = "tif tif-pinned";
     public const string PinnedOff = "ti ti-pinned-off";
+    public const string Pipeline = "ti ti-pipeline";
     public const string Pizza = "ti ti-pizza";
     public const string PizzaFilled = "tif tif-pizza";
     public const string PizzaOff = "ti ti-pizza-off";
@@ -4779,6 +4792,7 @@ public static class TablerIconConstants
     public const string Quote = "ti ti-quote";
     public const string QuoteFilled = "tif tif-quote";
     public const string QuoteOff = "ti ti-quote-off";
+    public const string QuoteOpen = "ti ti-quote-open";
     public const string Quotes = "ti ti-quotes";
     public const string Radar = "ti ti-radar";
     public const string Radar2 = "ti ti-radar-2";
@@ -4979,6 +4993,8 @@ public static class TablerIconConstants
     public const string ScaleOutlineOff = "ti ti-scale-outline-off";
     public const string Scan = "ti ti-scan";
     public const string ScanEye = "ti ti-scan-eye";
+    public const string ScanLetterA = "ti ti-scan-letter-a";
+    public const string ScanLetterT = "ti ti-scan-letter-t";
     public const string ScanPosition = "ti ti-scan-position";
     public const string ScanTraces = "ti ti-scan-traces";
     public const string Schema = "ti ti-schema";
@@ -5019,6 +5035,7 @@ public static class TablerIconConstants
     public const string Seedling = "ti ti-seedling";
     public const string SeedlingFilled = "tif tif-seedling";
     public const string SeedlingOff = "ti ti-seedling-off";
+    public const string Segway = "ti ti-segway";
     public const string Select = "ti ti-select";
     public const string SelectAll = "ti ti-select-all";
     public const string Selector = "ti ti-selector";
@@ -6075,6 +6092,7 @@ public static class TablerIconConstants
     public const string WritingSignOff = "ti ti-writing-sign-off";
     public const string X = "ti ti-x";
     public const string XFilled = "tif tif-x";
+    public const string XMark = "ti ti-x-mark";
     public const string XPowerY = "ti ti-x-power-y";
     public const string XboxA = "ti ti-xbox-a";
     public const string XboxAFilled = "tif tif-xbox-a";
