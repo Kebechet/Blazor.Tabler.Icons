@@ -8,6 +8,7 @@
 [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/samuel_sidor.svg?style=social&label=Follow%20samuel_sidor)](https://x.com/samuel_sidor)
 
 A Blazor component library providing [Tabler Icons](https://tabler.io/icons) (5000+ icons) with strongly-typed enums and constant-time lookups.
+https://github.com/tabler/tabler-icons
 
 **Automatically updated** - A daily pipeline checks for new Tabler Icons releases and publishes updates automatically. No manual maintenance needed!
 
