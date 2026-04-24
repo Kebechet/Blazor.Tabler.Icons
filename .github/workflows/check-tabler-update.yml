@@ -9,7 +9,6 @@ env:
   PROJECT_PATH: src/Blazor.Tabler.Icons/Blazor.Tabler.Icons.csproj
   SCRIPT_PATH: scripts/Generate-TablerIcons.ps1
   PACKAGE_NAME: Kebechet.Blazor.Tabler.Icons
-  DOTNET_VERSION: '10.0.x'
   BUILD_CONFIGURATION: Release
   OUTPUT_PATH: ./nupkg
   NPM_PACKAGE: '@tabler/icons-webfont'
@@ -62,7 +61,12 @@ jobs:
         if: steps.check.outputs.update_needed == 'true'
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: |
+            6.0.x
+            7.0.x
+            8.0.x
+            9.0.x
+            10.0.x
 
       - name: Update script version
         if: steps.check.outputs.update_needed == 'true'
