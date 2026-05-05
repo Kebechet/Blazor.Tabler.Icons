@@ -1102,6 +1102,7 @@ public static class TablerIconConstants
     public const string BrandStackshare = "ti ti-brand-stackshare";
     public const string BrandSteam = "ti ti-brand-steam";
     public const string BrandSteamFilled = "tif tif-brand-steam";
+    public const string BrandStellar = "ti ti-brand-stellar";
     public const string BrandStocktwits = "ti ti-brand-stocktwits";
     public const string BrandStorj = "ti ti-brand-storj";
     public const string BrandStorybook = "ti ti-brand-storybook";
@@ -1155,6 +1156,7 @@ public static class TablerIconConstants
     public const string BrandUnsplash = "ti ti-brand-unsplash";
     public const string BrandUpwork = "ti ti-brand-upwork";
     public const string BrandValorant = "ti ti-brand-valorant";
+    public const string BrandVechain = "ti ti-brand-vechain";
     public const string BrandVercel = "ti ti-brand-vercel";
     public const string BrandVercelFilled = "tif tif-brand-vercel";
     public const string BrandVimeo = "ti ti-brand-vimeo";
@@ -1841,6 +1843,8 @@ public static class TablerIconConstants
     public const string CircuitVoltmeter = "ti ti-circuit-voltmeter";
     public const string ClearAll = "ti ti-clear-all";
     public const string ClearFormatting = "ti ti-clear-formatting";
+    public const string Clef = "ti ti-clef";
+    public const string ClefStaff = "ti ti-clef-staff";
     public const string Click = "ti ti-click";
     public const string ClickFilled = "tif tif-click";
     public const string CliffJumping = "ti ti-cliff-jumping";
@@ -2172,6 +2176,7 @@ public static class TablerIconConstants
     public const string CurrencyFrank = "ti ti-currency-frank";
     public const string CurrencyGuarani = "ti ti-currency-guarani";
     public const string CurrencyHryvnia = "ti ti-currency-hryvnia";
+    public const string CurrencyHusd = "ti ti-currency-husd";
     public const string CurrencyIranianRial = "ti ti-currency-iranian-rial";
     public const string CurrencyKip = "ti ti-currency-kip";
     public const string CurrencyKroneCzech = "ti ti-currency-krone-czech";
@@ -2205,12 +2210,14 @@ public static class TablerIconConstants
     public const string CurrencySom = "ti ti-currency-som";
     public const string CurrencyTaka = "ti ti-currency-taka";
     public const string CurrencyTenge = "ti ti-currency-tenge";
+    public const string CurrencyTether = "ti ti-currency-tether";
     public const string CurrencyTugrik = "ti ti-currency-tugrik";
     public const string CurrencyWon = "ti ti-currency-won";
     public const string CurrencyXrp = "ti ti-currency-xrp";
     public const string CurrencyYen = "ti ti-currency-yen";
     public const string CurrencyYenOff = "ti ti-currency-yen-off";
     public const string CurrencyYuan = "ti ti-currency-yuan";
+    public const string CurrencyZcash = "ti ti-currency-zcash";
     public const string CurrencyZloty = "ti ti-currency-zloty";
     public const string CurrentLocation = "ti ti-current-location";
     public const string CurrentLocationFilled = "tif tif-current-location";
@@ -2265,6 +2272,7 @@ public static class TablerIconConstants
     public const string DeviceCctvFilled = "tif tif-device-cctv";
     public const string DeviceCctvOff = "ti ti-device-cctv-off";
     public const string DeviceComputerCamera = "ti ti-device-computer-camera";
+    public const string DeviceComputerCamera2 = "ti ti-device-computer-camera-2";
     public const string DeviceComputerCameraOff = "ti ti-device-computer-camera-off";
     public const string DeviceDesktop = "ti ti-device-desktop";
     public const string DeviceDesktopAnalytics = "ti ti-device-desktop-analytics";
@@ -2549,6 +2557,7 @@ public static class TablerIconConstants
     public const string Door = "ti ti-door";
     public const string DoorEnter = "ti ti-door-enter";
     public const string DoorExit = "ti ti-door-exit";
+    public const string DoorHanger = "ti ti-door-hanger";
     public const string DoorOff = "ti ti-door-off";
     public const string Dots = "ti ti-dots";
     public const string DotsCircleHorizontal = "ti ti-dots-circle-horizontal";
@@ -2602,6 +2611,7 @@ public static class TablerIconConstants
     public const string Ear = "ti ti-ear";
     public const string EarOff = "ti ti-ear-off";
     public const string EarScan = "ti ti-ear-scan";
+    public const string EarphoneBluetooth = "ti ti-earphone-bluetooth";
     public const string EaseIn = "ti ti-ease-in";
     public const string EaseInControlPoint = "ti ti-ease-in-control-point";
     public const string EaseInControlPointFilled = "tif tif-ease-in-control-point";
@@ -3111,6 +3121,7 @@ public static class TablerIconConstants
     public const string GpsFilled = "tif tif-gps";
     public const string Gradienter = "ti ti-gradienter";
     public const string Grain = "ti ti-grain";
+    public const string Grape = "ti ti-grape";
     public const string Graph = "ti ti-graph";
     public const string GraphFilled = "tif tif-graph";
     public const string GraphOff = "ti ti-graph-off";
@@ -3140,6 +3151,7 @@ public static class TablerIconConstants
     public const string H5 = "ti ti-h-5";
     public const string H6 = "ti ti-h-6";
     public const string Hammer = "ti ti-hammer";
+    public const string HammerDrill = "ti ti-hammer-drill";
     public const string HammerOff = "ti ti-hammer-off";
     public const string HandClick = "ti ti-hand-click";
     public const string HandClickOff = "ti ti-hand-click-off";
@@ -3436,6 +3448,7 @@ public static class TablerIconConstants
     public const string IndentDecrease = "ti ti-indent-decrease";
     public const string IndentIncrease = "ti ti-indent-increase";
     public const string Infinity = "ti ti-infinity";
+    public const string Infinity2 = "ti ti-infinity-2";
     public const string InfinityOff = "ti ti-infinity-off";
     public const string InfoCircle = "ti ti-info-circle";
     public const string InfoCircleFilled = "tif tif-info-circle";
@@ -3552,6 +3565,7 @@ public static class TablerIconConstants
     public const string LaurelWreath3 = "ti ti-laurel-wreath-3";
     public const string LaurelWreath3Filled = "tif tif-laurel-wreath-3";
     public const string LaurelWreathFilled = "tif tif-laurel-wreath";
+    public const string LawnMower = "ti ti-lawn-mower";
     public const string LayersDifference = "ti ti-layers-difference";
     public const string LayersIntersect = "ti ti-layers-intersect";
     public const string LayersIntersect2 = "ti ti-layers-intersect-2";
@@ -3737,6 +3751,7 @@ public static class TablerIconConstants
     public const string Loader = "ti ti-loader";
     public const string Loader2 = "ti ti-loader-2";
     public const string Loader3 = "ti ti-loader-3";
+    public const string Loader4 = "ti ti-loader-4";
     public const string LoaderQuarter = "ti ti-loader-quarter";
     public const string Location = "ti ti-location";
     public const string LocationBolt = "ti ti-location-bolt";
@@ -4181,6 +4196,7 @@ public static class TablerIconConstants
     public const string MoonOff = "ti ti-moon-off";
     public const string MoonStars = "ti ti-moon-stars";
     public const string Moped = "ti ti-moped";
+    public const string Mosque = "ti ti-mosque";
     public const string Motorbike = "ti ti-motorbike";
     public const string MotorbikeFilled = "tif tif-motorbike";
     public const string Mountain = "ti ti-mountain";
@@ -4485,6 +4501,7 @@ public static class TablerIconConstants
     public const string PencilStar = "ti ti-pencil-star";
     public const string PencilUp = "ti ti-pencil-up";
     public const string PencilX = "ti ti-pencil-x";
+    public const string Pendulum = "ti ti-pendulum";
     public const string Pennant = "ti ti-pennant";
     public const string Pennant2 = "ti ti-pennant-2";
     public const string Pennant2Filled = "tif tif-pennant-2";
@@ -4705,6 +4722,7 @@ public static class TablerIconConstants
     public const string PlugConnectedX = "ti ti-plug-connected-x";
     public const string PlugOff = "ti ti-plug-off";
     public const string PlugX = "ti ti-plug-x";
+    public const string Plunger = "ti ti-plunger";
     public const string Plus = "ti ti-plus";
     public const string PlusEqual = "ti ti-plus-equal";
     public const string PlusFilled = "tif tif-plus";
