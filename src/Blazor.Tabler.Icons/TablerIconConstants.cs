@@ -1977,6 +1977,7 @@ public static class TablerIconConstants
     public const string Clubs = "ti ti-clubs";
     public const string ClubsFilled = "tif tif-clubs";
     public const string Code = "ti ti-code";
+    public const string CodeAi = "ti ti-code-ai";
     public const string CodeAsterisk = "ti ti-code-asterisk";
     public const string CodeAsterix = "ti ti-code-asterix";
     public const string CodeCircle = "ti ti-code-circle";
@@ -2646,6 +2647,7 @@ public static class TablerIconConstants
     public const string Elevator = "ti ti-elevator";
     public const string ElevatorFilled = "tif tif-elevator";
     public const string ElevatorOff = "ti ti-elevator-off";
+    public const string EmailStamp = "ti ti-email-stamp";
     public const string EmergencyBed = "ti ti-emergency-bed";
     public const string Empathize = "ti ti-empathize";
     public const string EmpathizeOff = "ti ti-empathize-off";
@@ -3034,6 +3036,7 @@ public static class TablerIconConstants
     public const string Folders = "ti ti-folders";
     public const string FoldersFilled = "tif tif-folders";
     public const string FoldersOff = "ti ti-folders-off";
+    public const string Foodsteps = "ti ti-foodsteps";
     public const string Forbid = "ti ti-forbid";
     public const string Forbid2 = "ti ti-forbid-2";
     public const string Forbid2Filled = "tif tif-forbid-2";
@@ -3111,6 +3114,7 @@ public static class TablerIconConstants
     public const string GitMerge = "ti ti-git-merge";
     public const string GitPullRequest = "ti ti-git-pull-request";
     public const string GitPullRequestClosed = "ti ti-git-pull-request-closed";
+    public const string GitPullRequestConflict = "ti ti-git-pull-request-conflict";
     public const string GitPullRequestDraft = "ti ti-git-pull-request-draft";
     public const string Gizmo = "ti ti-gizmo";
     public const string Glass = "ti ti-glass";
@@ -4294,6 +4298,7 @@ public static class TablerIconConstants
     public const string NoCopyright = "ti ti-no-copyright";
     public const string NoCreativeCommons = "ti ti-no-creative-commons";
     public const string NoDerivatives = "ti ti-no-derivatives";
+    public const string NoiseReduction = "ti ti-noise-reduction";
     public const string NorthStar = "ti ti-north-star";
     public const string Notdef = "ti ti-notdef";
     public const string Note = "ti ti-note";
@@ -4580,6 +4585,7 @@ public static class TablerIconConstants
     public const string PhoneXFilled = "tif tif-phone-x";
     public const string Photo = "ti ti-photo";
     public const string PhotoAi = "ti ti-photo-ai";
+    public const string PhotoAlt = "ti ti-photo-alt";
     public const string PhotoBitcoin = "ti ti-photo-bitcoin";
     public const string PhotoBolt = "ti ti-photo-bolt";
     public const string PhotoCancel = "ti ti-photo-cancel";
@@ -4748,11 +4754,14 @@ public static class TablerIconConstants
     public const string PointFilled = "tif tif-point";
     public const string PointOff = "ti ti-point-off";
     public const string Pointer = "ti ti-pointer";
+    public const string Pointer2 = "ti ti-pointer-2";
     public const string PointerBolt = "ti ti-pointer-bolt";
     public const string PointerCancel = "ti ti-pointer-cancel";
     public const string PointerCheck = "ti ti-pointer-check";
     public const string PointerCode = "ti ti-pointer-code";
     public const string PointerCog = "ti ti-pointer-cog";
+    public const string PointerCollaboration = "ti ti-pointer-collaboration";
+    public const string PointerCollaboration2 = "ti ti-pointer-collaboration-2";
     public const string PointerDollar = "ti ti-pointer-dollar";
     public const string PointerDown = "ti ti-pointer-down";
     public const string PointerExclamation = "ti ti-pointer-exclamation";
@@ -4976,6 +4985,7 @@ public static class TablerIconConstants
     public const string RotateClockwise2 = "ti ti-rotate-clockwise-2";
     public const string RotateDot = "ti ti-rotate-dot";
     public const string RotateRectangle = "ti ti-rotate-rectangle";
+    public const string Roulette = "ti ti-roulette";
     public const string Route = "ti ti-route";
     public const string Route2 = "ti ti-route-2";
     public const string RouteAltLeft = "ti ti-route-alt-left";
@@ -5025,6 +5035,7 @@ public static class TablerIconConstants
     public const string ScaleOutline = "ti ti-scale-outline";
     public const string ScaleOutlineOff = "ti ti-scale-outline-off";
     public const string Scan = "ti ti-scan";
+    public const string ScanCube = "ti ti-scan-cube";
     public const string ScanEye = "ti ti-scan-eye";
     public const string ScanLetterA = "ti ti-scan-letter-a";
     public const string ScanLetterT = "ti ti-scan-letter-t";
@@ -5224,6 +5235,7 @@ public static class TablerIconConstants
     public const string Skateboard = "ti ti-skateboard";
     public const string SkateboardOff = "ti ti-skateboard-off";
     public const string Skateboarding = "ti ti-skateboarding";
+    public const string Sketching = "ti ti-sketching";
     public const string SkewX = "ti ti-skew-x";
     public const string SkewY = "ti ti-skew-y";
     public const string SkiJumping = "ti ti-ski-jumping";
@@ -5283,6 +5295,9 @@ public static class TablerIconConstants
     public const string SpacingVertical = "ti ti-spacing-vertical";
     public const string Spade = "ti ti-spade";
     public const string SpadeFilled = "tif tif-spade";
+    public const string Sparkle = "ti ti-sparkle";
+    public const string Sparkle2 = "ti ti-sparkle-2";
+    public const string SparkleHighlight = "ti ti-sparkle-highlight";
     public const string Sparkles = "ti ti-sparkles";
     public const string Sparkles2 = "ti ti-sparkles-2";
     public const string Sparkles2Filled = "tif tif-sparkles-2";
@@ -5291,6 +5306,7 @@ public static class TablerIconConstants
     public const string Speedboat = "ti ti-speedboat";
     public const string SpeedboatFilled = "tif tif-speedboat";
     public const string Sphere = "ti ti-sphere";
+    public const string Sphere2 = "ti ti-sphere-2";
     public const string SphereOff = "ti ti-sphere-off";
     public const string SpherePlus = "ti ti-sphere-plus";
     public const string Spider = "ti ti-spider";
@@ -5742,6 +5758,7 @@ public static class TablerIconConstants
     public const string TextRecognition = "ti ti-text-recognition";
     public const string TextResize = "ti ti-text-resize";
     public const string TextScan2 = "ti ti-text-scan-2";
+    public const string TextScanAi = "ti ti-text-scan-ai";
     public const string TextSize = "ti ti-text-size";
     public const string TextSpellcheck = "ti ti-text-spellcheck";
     public const string TextWrap = "ti ti-text-wrap";
@@ -5999,6 +6016,7 @@ public static class TablerIconConstants
     public const string ViewportShort = "ti ti-viewport-short";
     public const string ViewportTall = "ti ti-viewport-tall";
     public const string ViewportWide = "ti ti-viewport-wide";
+    public const string Vignette = "ti ti-vignette";
     public const string Vinyl = "ti ti-vinyl";
     public const string Vip = "ti ti-vip";
     public const string Vip2 = "ti ti-vip-2";
