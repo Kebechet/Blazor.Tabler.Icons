@@ -49,14 +49,11 @@
                       OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
   </ItemGroup>
 
+  <!-- Pack the generator (built via the analyzer ProjectReference above) into the package.
+       Reference its output by path rather than invoking Build, so packing with no-build works. -->
   <Target Name="_IncludeGeneratorInPackage" BeforeTargets="GenerateNuspec">
-    <MSBuild Projects="..\Blazor.Tabler.Icons.Svg.Generator\Blazor.Tabler.Icons.Svg.Generator.csproj"
-             Targets="Build"
-             Properties="Configuration=$(Configuration);TargetFramework=netstandard2.0">
-      <Output TaskParameter="TargetOutputs" ItemName="_GeneratorOutput" />
-    </MSBuild>
     <ItemGroup>
-      <_PackageFiles Include="@(_GeneratorOutput)" Condition="'%(Extension)' == '.dll'">
+      <_PackageFiles Include="$(MSBuildThisFileDirectory)..\Blazor.Tabler.Icons.Svg.Generator\bin\$(Configuration)\netstandard2.0\Blazor.Tabler.Icons.Svg.Generator.dll">
         <PackagePath>analyzers/dotnet/cs</PackagePath>
         <BuildAction>None</BuildAction>
       </_PackageFiles>
