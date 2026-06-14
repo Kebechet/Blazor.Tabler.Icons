@@ -1,0 +1,89 @@
+@namespace Blazor.Tabler.Icons.Svg
+
+@if (_hasIcon)
+{
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="1em"
+         height="1em"
+         viewBox="0 0 24 24"
+         fill="@_fill"
+         stroke="@_stroke"
+         stroke-width="@_strokeWidth"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         class="@CssClass"
+         style="@Style"
+         @attributes="Attributes">
+        @_inner
+    </svg>
+}
+
+@code {
+    /// <summary>
+    /// The Tabler icon to render. Required.
+    /// </summary>
+    [Parameter, EditorRequired]
+    public TablerIconType Type { get; set; }
+
+    /// <summary>
+    /// Additional CSS classes, appended after the base <c>tabler-icon</c> class. This is the
+    /// primary way to size and color the icon - see the size remarks below. Color follows the
+    /// CSS text color (the icon uses <c>currentColor</c>), e.g. <c>text-red-500</c>.
+    /// </summary>
+    /// <remarks>
+    /// The SVG defaults to <c>width</c>/<c>height</c> of <c>1em</c>, so its size can be driven two ways:
+    /// <list type="bullet">
+    /// <item><description>
+    /// <b>By font size</b> - a <c>font-size</c> class scales the icon (e.g. <c>text-2xl</c>),
+    /// just like the icon-font backend.
+    /// </description></item>
+    /// <item><description>
+    /// <b>By width/height</b> - a CSS <c>width</c>/<c>height</c> overrides the <c>1em</c> default
+    /// (CSS wins over SVG presentation attributes): <c>size-6</c>, <c>w-5 h-5</c>, or <c>size-full</c>
+    /// to fill a sized parent element.
+    /// </description></item>
+    /// </list>
+    /// </remarks>
+    [Parameter]
+    public string? Class { get; set; }
+
+    /// <summary>
+    /// Inline styles applied to the <c>&lt;svg&gt;</c> (e.g. <c>font-size</c>, <c>width</c>/<c>height</c>,
+    /// <c>color</c>, <c>stroke-width</c>).
+    /// </summary>
+    [Parameter]
+    public string? Style { get; set; }
+
+    /// <summary>
+    /// Captures any unmatched attributes (e.g. <c>@onclick</c>, <c>title</c>, <c>aria-*</c>)
+    /// and forwards them to the <c>&lt;svg&gt;</c> element.
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? Attributes { get; set; }
+
+    private bool _hasIcon;
+    private bool _isFilled;
+    private MarkupString _inner;
+
+    private string _fill => _isFilled ? "currentColor" : "none";
+    private string _stroke => _isFilled ? "none" : "currentColor";
+    private string? _strokeWidth => _isFilled ? null : "2";
+
+    private string CssClass => string.IsNullOrEmpty(Class)
+        ? "tabler-icon"
+        : $"tabler-icon {Class}";
+
+    protected override void OnParametersSet()
+    {
+        if (TablerSvgRegistry.TryGet(Type, out var entry))
+        {
+            _hasIcon = true;
+            _isFilled = entry.IsFilled;
+            _inner = new MarkupString(entry.Inner);
+        }
+        else
+        {
+            _hasIcon = false;
+        }
+    }
+}

@@ -5,6 +5,7 @@ on:
 
 env:
   PROJECT_PATH: src/Blazor.Tabler.Icons/Blazor.Tabler.Icons.csproj
+  PROJECT_PATH_SVG: src/Blazor.Tabler.Icons.Svg/Blazor.Tabler.Icons.Svg.csproj
   PACKAGE_NAME: Kebechet.Blazor.Tabler.Icons
   BUILD_CONFIGURATION: Release
   OUTPUT_PATH: ./nupkg
@@ -45,6 +46,12 @@ jobs:
 
       - name: Pack
         run: dotnet pack ${{ env.PROJECT_PATH }} --configuration ${{ env.BUILD_CONFIGURATION }} --no-build --output ${{ env.OUTPUT_PATH }}
+
+      - name: Build SVG
+        run: dotnet build ${{ env.PROJECT_PATH_SVG }} --configuration ${{ env.BUILD_CONFIGURATION }}
+
+      - name: Pack SVG
+        run: dotnet pack ${{ env.PROJECT_PATH_SVG }} --configuration ${{ env.BUILD_CONFIGURATION }} --no-build --output ${{ env.OUTPUT_PATH }}
 
       - name: Publish to NuGet
         run: dotnet nuget push ${{ env.OUTPUT_PATH }}/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source ${{ env.NUGET_SOURCE }} --skip-duplicate

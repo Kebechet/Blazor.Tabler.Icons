@@ -1,15 +1,29 @@
 <i class="@CssClass" style="@Style" @attributes="@Attributes"></i>
 
 @code {
+    /// <summary>
+    /// The Tabler icon to render. Required.
+    /// </summary>
     [Parameter, EditorRequired]
     public TablerIconType Type { get; set; }
 
+    /// <summary>
+    /// Additional CSS classes, appended after the icon's own <c>ti ti-*</c> class.
+    /// </summary>
     [Parameter]
     public string? Class { get; set; }
 
+    /// <summary>
+    /// Inline styles applied to the <c>&lt;i&gt;</c>. The icon is a font, so size and color it
+    /// with <c>font-size</c> and <c>color</c> (e.g. <c>"font-size: 2rem; color: red"</c>).
+    /// </summary>
     [Parameter]
     public string? Style { get; set; }
 
+    /// <summary>
+    /// Captures any unmatched attributes (e.g. <c>@onclick</c>, <c>title</c>, <c>aria-*</c>)
+    /// and forwards them to the <c>&lt;i&gt;</c> element.
+    /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object>? Attributes { get; set; }
 

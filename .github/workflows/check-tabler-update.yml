@@ -7,7 +7,9 @@ on:
 
 env:
   PROJECT_PATH: src/Blazor.Tabler.Icons/Blazor.Tabler.Icons.csproj
-  SCRIPT_PATH: scripts/Generate-TablerIcons.ps1
+  PROJECT_PATH_SVG: src/Blazor.Tabler.Icons.Svg/Blazor.Tabler.Icons.Svg.csproj
+  SCRIPT_PATH: scripts/Generate-TablerIcons.cs
+  SVG_SCRIPT_PATH: scripts/Generate-TablerSvgData.cs
   PACKAGE_NAME: Kebechet.Blazor.Tabler.Icons
   BUILD_CONFIGURATION: Release
   OUTPUT_PATH: ./nupkg
@@ -68,25 +70,29 @@ jobs:
             9.0.x
             10.0.x
 
-      - name: Update script version
-        if: steps.check.outputs.update_needed == 'true'
-        run: |
-          sed -i "s|icons-webfont-[0-9.]*\.tgz|icons-webfont-${{ steps.latest.outputs.version }}.tgz|" ${{ env.SCRIPT_PATH }}
-
       - name: Run generation script
         if: steps.check.outputs.update_needed == 'true'
-        shell: pwsh
-        run: ./${{ env.SCRIPT_PATH }}
+        run: dotnet run ${{ env.SCRIPT_PATH }} -- ${{ steps.latest.outputs.version }}
+
+      - name: Generate SVG dataset
+        if: steps.check.outputs.update_needed == 'true'
+        run: dotnet run ${{ env.SVG_SCRIPT_PATH }} -- ${{ steps.latest.outputs.version }}
 
       - name: Update csproj version
         if: steps.check.outputs.update_needed == 'true'
         run: |
           sed -i "s|<Version>.*</Version>|<Version>${{ steps.latest.outputs.version }}</Version>|" ${{ env.PROJECT_PATH }}
+          sed -i "s|<Version>.*</Version>|<Version>${{ steps.latest.outputs.version }}</Version>|" ${{ env.PROJECT_PATH_SVG }}
 
       - name: Update release notes
         if: steps.check.outputs.update_needed == 'true'
         run: |
           sed -i "s|<PackageReleaseNotes>.*</PackageReleaseNotes>|<PackageReleaseNotes>Bumped to Tabler Icons v${{ steps.latest.outputs.version }}</PackageReleaseNotes>|" ${{ env.PROJECT_PATH }}
+          sed -i "s|<PackageReleaseNotes>.*</PackageReleaseNotes>|<PackageReleaseNotes>SVG backend for Tabler Icons v${{ steps.latest.outputs.version }}</PackageReleaseNotes>|" ${{ env.PROJECT_PATH_SVG }}
+
+      - name: Run tests
+        if: steps.check.outputs.update_needed == 'true'
+        run: dotnet test src/Blazor.Tabler.Icons.slnx --configuration ${{ env.BUILD_CONFIGURATION }}
 
       - name: Build
         if: steps.check.outputs.update_needed == 'true'
@@ -95,6 +101,14 @@ jobs:
       - name: Pack
         if: steps.check.outputs.update_needed == 'true'
         run: dotnet pack ${{ env.PROJECT_PATH }} --configuration ${{ env.BUILD_CONFIGURATION }} --no-build --output ${{ env.OUTPUT_PATH }}
+
+      - name: Build SVG
+        if: steps.check.outputs.update_needed == 'true'
+        run: dotnet build ${{ env.PROJECT_PATH_SVG }} --configuration ${{ env.BUILD_CONFIGURATION }}
+
+      - name: Pack SVG
+        if: steps.check.outputs.update_needed == 'true'
+        run: dotnet pack ${{ env.PROJECT_PATH_SVG }} --configuration ${{ env.BUILD_CONFIGURATION }} --no-build --output ${{ env.OUTPUT_PATH }}
 
       - name: Commit and push
         if: steps.check.outputs.update_needed == 'true'

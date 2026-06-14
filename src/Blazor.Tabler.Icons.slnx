@@ -1,3 +1,10 @@
 <Solution>
+  <Project Path="Core/Core.shproj" />
   <Project Path="Blazor.Tabler.Icons/Blazor.Tabler.Icons.csproj" />
+  <Project Path="Blazor.Tabler.Icons.Svg/Blazor.Tabler.Icons.Svg.csproj" />
+  <Project Path="Blazor.Tabler.Icons.Svg.Generator/Blazor.Tabler.Icons.Svg.Generator.csproj" />
+  <Folder Name="/tests/">
+    <Project Path="../tests/Blazor.Tabler.Icons.Tests/Blazor.Tabler.Icons.Tests.csproj" />
+    <Project Path="../tests/Blazor.Tabler.Icons.Svg.Tests/Blazor.Tabler.Icons.Svg.Tests.csproj" />
+  </Folder>
 </Solution>

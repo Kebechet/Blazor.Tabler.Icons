@@ -1,0 +1,82 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;net7.0;net8.0;net9.0;net10.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NugetProperties">
+    <Authors>Kebechet</Authors>
+    <IsPackable>true</IsPackable>
+    <PackageId>Kebechet.Blazor.Tabler.Icons.Svg</PackageId>
+    <Description>Tree-shaking SVG Tabler Icons for Blazor. A source generator inlines only the icons you reference, so unused icons never ship. Strongly-typed via the same TablerIconType enum.</Description>
+    <RepositoryUrl>https://github.com/Kebechet/Blazor.Icons.Tabler</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Kebechet/Blazor.Icons.Tabler</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageIcon>icon.png</PackageIcon>
+    <Version>3.44.0</Version>
+    <PackageReleaseNotes>Initial SVG (tree-shaking) backend for Tabler Icons v3.44.0</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <Import Project="..\Core\Core.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blazor.Tabler.Icons.Svg.Generator\Blazor.Tabler.Icons.Svg.Generator.csproj"
+                      OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
+  </ItemGroup>
+
+  <Target Name="_IncludeGeneratorInPackage" BeforeTargets="GenerateNuspec">
+    <MSBuild Projects="..\Blazor.Tabler.Icons.Svg.Generator\Blazor.Tabler.Icons.Svg.Generator.csproj"
+             Targets="Build"
+             Properties="Configuration=$(Configuration);TargetFramework=netstandard2.0">
+      <Output TaskParameter="TargetOutputs" ItemName="_GeneratorOutput" />
+    </MSBuild>
+    <ItemGroup>
+      <_PackageFiles Include="@(_GeneratorOutput)" Condition="'%(Extension)' == '.dll'">
+        <PackagePath>analyzers/dotnet/cs</PackagePath>
+        <BuildAction>None</BuildAction>
+      </_PackageFiles>
+    </ItemGroup>
+  </Target>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.0" />
+  </ItemGroup>
+
+</Project>

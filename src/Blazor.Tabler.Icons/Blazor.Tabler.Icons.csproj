@@ -24,7 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\README.md">
+    <None Include="README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
@@ -37,6 +37,8 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
+
+  <Import Project="..\Core\Core.projitems" Label="Shared" />
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
