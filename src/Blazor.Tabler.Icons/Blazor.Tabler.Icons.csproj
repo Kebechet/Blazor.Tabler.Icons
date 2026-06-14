@@ -19,8 +19,8 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>3.44.0</Version>
-    <PackageReleaseNotes>Bumped to Tabler Icons v3.44.0</PackageReleaseNotes>
+    <Version>3.44.0.1</Version>
+    <PackageReleaseNotes>Refreshed to Tabler Icons 3.44.0. The TablerIconType enum now lives in a shared Core project (non-breaking). A companion tree-shaking SVG package, Kebechet.Blazor.Tabler.Icons.Svg, is now available.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
