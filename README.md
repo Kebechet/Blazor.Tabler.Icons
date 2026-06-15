@@ -2,15 +2,15 @@
 
 # Blazor.Icons.Tabler
 
-[![Auto Update](https://github.com/Kebechet/Blazor.Icons.Tabler/actions/workflows/check-tabler-update.yml/badge.svg)](https://github.com/Kebechet/Blazor.Icons.Tabler/actions/workflows/check-tabler-update.yml)
-![Last updated](https://img.shields.io/github/last-commit/Kebechet/Blazor.Icons.Tabler/main?label=last%20updated)
-[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/samuel_sidor.svg?style=social&label=Follow%20samuel_sidor)](https://x.com/samuel_sidor)
-
 [![NuGet Version](https://img.shields.io/nuget/v/Kebechet.Blazor.Tabler.Icons?label=nuget%20%28font%29)](https://www.nuget.org/packages/Kebechet.Blazor.Tabler.Icons/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Kebechet.Blazor.Tabler.Icons?label=downloads%20%28font%29)](https://www.nuget.org/packages/Kebechet.Blazor.Tabler.Icons/)
 
 [![NuGet Version (SVG)](https://img.shields.io/nuget/v/Kebechet.Blazor.Tabler.Icons.Svg?label=nuget%20%28svg%29)](https://www.nuget.org/packages/Kebechet.Blazor.Tabler.Icons.Svg/)
 [![NuGet Downloads (SVG)](https://img.shields.io/nuget/dt/Kebechet.Blazor.Tabler.Icons.Svg?label=downloads%20%28svg%29)](https://www.nuget.org/packages/Kebechet.Blazor.Tabler.Icons.Svg/)
+
+[![Auto Update](https://github.com/Kebechet/Blazor.Icons.Tabler/actions/workflows/check-tabler-update.yml/badge.svg)](https://github.com/Kebechet/Blazor.Icons.Tabler/actions/workflows/check-tabler-update.yml)
+![Last updated](https://img.shields.io/github/last-commit/Kebechet/Blazor.Icons.Tabler/main?label=last%20updated)
+[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/samuel_sidor.svg?style=social&label=Follow%20samuel_sidor)](https://x.com/samuel_sidor)
 
 [Tabler Icons](https://tabler.io/icons) (6000+) for Blazor with a strongly-typed `TablerIconType` enum and no runtime reflection. **Automatically updated** - a daily pipeline publishes new Tabler releases.
 
