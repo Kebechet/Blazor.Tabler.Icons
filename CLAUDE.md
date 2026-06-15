@@ -44,6 +44,8 @@ Both take an optional version arg, e.g. `dotnet run scripts/Generate-TablerSvgDa
 
 Runs in the **consumer's** build, scans `.razor`/`.cs` for `TablerIconType.X` references (+ `[assembly: IncludeTablerIcons(...)]` for runtime-chosen icons), and emits a `[ModuleInitializer]` registering only those icons into `TablerSvgRegistry`. Unused icons are never generated -> nothing ships. Diagnostics: `TABLERSVG001` (non-constant `Type`), `TABLERSVG002` (referenced icon missing from dataset).
 
+**Enum aliases** (`using X = TablerIconType`, any name) are detected automatically: C# matches semantically (broad member-access predicate + symbol resolution), and markup is text-scanned for alias tokens discovered from the compilation's `using` directives - so no alias name is hardcoded. When changing the C# predicate, keep it semantic (don't pre-filter on the literal name `TablerIconType`, or aliases break).
+
 ## Build & test
 
 ```bash

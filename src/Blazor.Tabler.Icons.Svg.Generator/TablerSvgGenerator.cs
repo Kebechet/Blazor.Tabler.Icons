@@ -42,11 +42,11 @@ public sealed class TablerSvgGenerator : IIncrementalGenerator
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
+        // Any `<identifier>.<member>` is a candidate; the semantic check resolves the symbol, so
+        // references through an enum alias (using X = TablerIconType) are matched too.
         var csharpNames = context.SyntaxProvider
             .CreateSyntaxProvider(
-                predicate: static (node, _) =>
-                    node is MemberAccessExpressionSyntax maes &&
-                    maes.Expression is IdentifierNameSyntax { Identifier.Text: "TablerIconType" },
+                predicate: static (node, _) => node is MemberAccessExpressionSyntax { Expression: IdentifierNameSyntax },
                 transform: static (ctx, _) =>
                 {
                     var maes = (MemberAccessExpressionSyntax) ctx.Node;
@@ -62,11 +62,33 @@ public sealed class TablerSvgGenerator : IIncrementalGenerator
             .Where(static name => name is not null)
             .Collect();
 
+        // Enum aliases (using/global using X = TablerIconType) discovered from the compilation,
+        // so markup text like "X.Plus" can be scanned without hardcoding any alias name.
+        var aliasNames = context.SyntaxProvider
+            .CreateSyntaxProvider(
+                predicate: static (node, _) => node is UsingDirectiveSyntax { Alias: not null },
+                transform: static (ctx, _) =>
+                {
+                    var usingDirective = (UsingDirectiveSyntax) ctx.Node;
+                    if (usingDirective.Name is null)
+                    {
+                        return null;
+                    }
+
+                    var symbol = ctx.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol;
+                    return symbol is INamedTypeSymbol named && named.ToDisplayString() == EnumMetadataName
+                        ? usingDirective.Alias!.Name.Identifier.Text
+                        : null;
+                })
+            .Where(static name => name is not null)
+            .Collect();
+
         var markupScans = context.AdditionalTextsProvider
             .Where(static at =>
                 at.Path.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) ||
                 at.Path.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase))
-            .Select(static (at, ct) => ScanMarkup(at.GetText(ct)?.ToString() ?? string.Empty))
+            .Combine(aliasNames)
+            .Select(static (pair, ct) => ScanMarkup(pair.Left.GetText(ct)?.ToString() ?? string.Empty, pair.Right))
             .Collect();
 
         var input = csharpNames.Combine(markupScans).Combine(context.CompilationProvider);
@@ -184,33 +206,53 @@ public sealed class TablerSvgGenerator : IIncrementalGenerator
         }
     }
 
-    private static MarkupScan ScanMarkup(string text)
+    private static MarkupScan ScanMarkup(string text, ImmutableArray<string?> aliases)
     {
-        var names = new List<string>();
-        const string token = "TablerIconType.";
-        var index = 0;
-        while ((index = text.IndexOf(token, index, StringComparison.Ordinal)) >= 0)
+        var tokens = new List<string> { "TablerIconType" };
+        foreach (var alias in aliases)
         {
-            var start = index + token.Length;
-            var end = start;
-            while (end < text.Length && (char.IsLetterOrDigit(text[end]) || text[end] == '_'))
+            if (!string.IsNullOrEmpty(alias) && !tokens.Contains(alias!))
             {
-                end++;
+                tokens.Add(alias!);
             }
+        }
 
-            if (end > start)
+        var names = new List<string>();
+        foreach (var token in tokens)
+        {
+            var search = token + ".";
+            var index = 0;
+            while ((index = text.IndexOf(search, index, StringComparison.Ordinal)) >= 0)
             {
-                names.Add(text.Substring(start, end - start));
-            }
+                // Require a word boundary before the token so the "IconType" alias does not match
+                // inside "TablerIconType." and a token does not match mid-identifier.
+                if (index > 0 && (char.IsLetterOrDigit(text[index - 1]) || text[index - 1] == '_'))
+                {
+                    index += search.Length;
+                    continue;
+                }
 
-            index = end;
+                var start = index + search.Length;
+                var end = start;
+                while (end < text.Length && (char.IsLetterOrDigit(text[end]) || text[end] == '_'))
+                {
+                    end++;
+                }
+
+                if (end > start)
+                {
+                    names.Add(text.Substring(start, end - start));
+                }
+
+                index = end;
+            }
         }
 
         var hasDynamicUsage = false;
         foreach (Match match in ComponentTypeAttribute.Matches(text))
         {
             var value = match.Groups["v"].Value;
-            if (!value.Contains("TablerIconType."))
+            if (!tokens.Any(token => value.Contains(token + ".")))
             {
                 hasDynamicUsage = true;
                 break;

@@ -51,6 +51,41 @@ public class SvgGeneratorTests
     }
 
     [Fact]
+    public void Generates_IconsReferenced_ViaAlias_InCSharp()
+    {
+        // Arrange - referenced through an enum alias of any name
+        const string source = """
+            using Whatever = Blazor.Tabler.Icons.TablerIconType;
+            public static class Usage
+            {
+                public static readonly Whatever A = Whatever.Plus;
+            }
+            """;
+
+        // Act
+        var (generated, _) = RunGenerator(source);
+
+        // Assert
+        Assert.Contains("TablerIconType.Plus", generated);
+    }
+
+    [Fact]
+    public void Generates_IconsReferenced_ViaAlias_InRazor()
+    {
+        // Arrange - alias declared as a C# global using; razor references it
+        const string source = "global using Whatever = Blazor.Tabler.Icons.TablerIconType;";
+        var razor = new InMemoryAdditionalText(
+            "Widget.razor",
+            "<TablerIcon Type=\"Whatever.Home\" />");
+
+        // Act
+        var (generated, _) = RunGenerator(source, razor);
+
+        // Assert
+        Assert.Contains("TablerIconType.Home,", generated);
+    }
+
+    [Fact]
     public void Generates_FilledIcon_WithFilledFlag()
     {
         // Arrange

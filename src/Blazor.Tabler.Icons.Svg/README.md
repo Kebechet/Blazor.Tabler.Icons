@@ -56,6 +56,8 @@ The `<svg>` defaults to `width`/`height` of `1em` and uses `currentColor`, so yo
 
 A Roslyn source generator runs in **your** build, scans your `.razor`/`.cs` for `TablerIconType.X` references, and emits a module initializer that registers only those icons. Unused icons are never generated, so they never ship - no trimmer configuration required. The full ~6000-icon dataset lives inside the generator (a build-time-only dependency) and never reaches the browser.
 
+References through an **enum alias** (any name, e.g. `global using IconType = TablerIconType;` then `IconType.Plus`) are detected automatically - in C# semantically, and in markup by discovering the alias from your `using` directives. No configuration needed.
+
 ## Icons selected at runtime
 
 Icons chosen dynamically (e.g. `Enum.Parse` from config) can't be seen statically. Force-include them:
