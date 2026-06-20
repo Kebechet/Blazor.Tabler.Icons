@@ -75,6 +75,20 @@ Build warnings keep this honest:
 
 Tabler keeps legacy/renamed names as **aliases** (e.g. `discount-2` -> `rosette-discount`, `hexagon-0` -> `hexagon-number-0`). The dataset resolves these from `aliases.json`, so an alias renders the canonical icon's SVG - `TablerIconType.Discount2` works under the SVG backend just like its canonical `TablerIconType.RosetteDiscount`.
 
+## Include every icon (galleries / dev tools)
+
+For an icon **gallery**, **showcase**, or runtime **icon-picker** - where the requirement is "any of the ~6000 icons, selectable at runtime" - listing them all is impractical. Opt out of tree-shaking entirely:
+
+```csharp
+#if DEBUG
+[assembly: IncludeAllTablerIcons]
+#endif
+```
+
+This registers every icon and disables tree-shaking, so any icon renders no matter how it is chosen (no `TABLERSVG001` warnings). The build prints **TABLERSVG003** (informational) as a reminder that all ~6000 icons are included.
+
+> Do not ship this in an app delivered to end users - it bloats the bundle, which is exactly what tree-shaking exists to prevent. The `#if DEBUG` guard keeps it out of Release builds; a gallery/Storybook is dev-only, so the bundle-size cost never reaches anyone.
+
 ## More
 
 Full docs and the font variant: [github.com/Kebechet/Blazor.Icons.Tabler](https://github.com/Kebechet/Blazor.Icons.Tabler)

@@ -137,6 +137,43 @@ public class SvgGeneratorTests
     }
 
     [Fact]
+    public void IncludeAll_RegistersIcon_ReferencedNowhere()
+    {
+        // Arrange - no icon is referenced anywhere; only the include-all attribute is present.
+        const string source = """
+            using Blazor.Tabler.Icons.Svg;
+            [assembly: IncludeAllTablerIcons]
+            """;
+
+        // Act
+        var (generated, _) = RunGenerator(source);
+
+        // Assert - an icon used in no source file is still registered, and the set is large.
+        Assert.Contains("TablerIconType.Home,", generated);
+        Assert.True(CountRegistrations(generated) > 1000);
+    }
+
+    [Fact]
+    public void IncludeAll_SuppressesDynamicUsageDiagnostic()
+    {
+        // Arrange - dynamic usage that would normally raise TABLERSVG001, plus include-all.
+        const string source = """
+            using Blazor.Tabler.Icons.Svg;
+            [assembly: IncludeAllTablerIcons]
+            """;
+        var razor = new InMemoryAdditionalText(
+            "Widget.razor",
+            "<TablerIcon Type=\"@_icon\" />");
+
+        // Act
+        var (_, diagnostics) = RunGenerator(source, razor);
+
+        // Assert
+        Assert.DoesNotContain(diagnostics, d => d.Id == "TABLERSVG001");
+        Assert.Contains(diagnostics, d => d.Id == "TABLERSVG003");
+    }
+
+    [Fact]
     public void Resolves_FontAlias_ToCanonicalSvg()
     {
         // Arrange - Discount2 is a font alias (-> rosette-discount); alias resolution fills its SVG.
