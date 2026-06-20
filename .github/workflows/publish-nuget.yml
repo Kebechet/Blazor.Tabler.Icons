@@ -7,6 +7,7 @@ env:
   PROJECT_PATH: src/Blazor.Tabler.Icons/Blazor.Tabler.Icons.csproj
   PROJECT_PATH_SVG: src/Blazor.Tabler.Icons.Svg/Blazor.Tabler.Icons.Svg.csproj
   PACKAGE_NAME: Kebechet.Blazor.Tabler.Icons
+  PACKAGE_NAME_SVG: Kebechet.Blazor.Tabler.Icons.Svg
   BUILD_CONFIGURATION: Release
   OUTPUT_PATH: ./nupkg
   NUGET_SOURCE: https://api.nuget.org/v3/index.json
@@ -38,6 +39,13 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Version: $VERSION"
 
+      - name: Get SVG version from csproj
+        id: version_svg
+        run: |
+          VERSION=$(grep -oP '(?<=<Version>)[^<]+' ${{ env.PROJECT_PATH_SVG }})
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "SVG version: $VERSION"
+
       - name: Restore dependencies
         run: dotnet restore ${{ env.PROJECT_PATH }}
 
@@ -59,7 +67,7 @@ jobs:
       - name: Publish to GitHub Packages
         run: dotnet nuget push ${{ env.OUTPUT_PATH }}/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
 
-      - name: Create GitHub Release
+      - name: Create GitHub Release (font)
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.version.outputs.version }}
@@ -75,5 +83,26 @@ jobs:
             ### Links
             - [NuGet Package](https://www.nuget.org/packages/${{ env.PACKAGE_NAME }}/${{ steps.version.outputs.version }})
             - [Tabler Icons](https://tabler.io/icons)
-          files: ${{ env.OUTPUT_PATH }}/*.nupkg
+          files: ${{ env.OUTPUT_PATH }}/${{ env.PACKAGE_NAME }}.${{ steps.version.outputs.version }}.nupkg
+          generate_release_notes: true
+
+      - name: Create GitHub Release (SVG)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version_svg.outputs.version }}-svg
+          name: v${{ steps.version_svg.outputs.version }}-svg
+          body: |
+            ## ${{ env.PACKAGE_NAME_SVG }} v${{ steps.version_svg.outputs.version }}
+
+            Inline SVG backend for Tabler Icons with build-time tree-shaking.
+
+            ### Installation
+            ```bash
+            dotnet add package ${{ env.PACKAGE_NAME_SVG }} --version ${{ steps.version_svg.outputs.version }}
+            ```
+
+            ### Links
+            - [NuGet Package](https://www.nuget.org/packages/${{ env.PACKAGE_NAME_SVG }}/${{ steps.version_svg.outputs.version }})
+            - [Tabler Icons](https://tabler.io/icons)
+          files: ${{ env.OUTPUT_PATH }}/${{ env.PACKAGE_NAME_SVG }}.${{ steps.version_svg.outputs.version }}.nupkg
           generate_release_notes: true

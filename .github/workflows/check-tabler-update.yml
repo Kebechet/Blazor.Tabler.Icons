@@ -11,6 +11,7 @@ env:
   SCRIPT_PATH: scripts/Generate-TablerIcons.cs
   SVG_SCRIPT_PATH: scripts/Generate-TablerSvgData.cs
   PACKAGE_NAME: Kebechet.Blazor.Tabler.Icons
+  PACKAGE_NAME_SVG: Kebechet.Blazor.Tabler.Icons.Svg
   BUILD_CONFIGURATION: Release
   OUTPUT_PATH: ./nupkg
   NPM_PACKAGE: '@tabler/icons-webfont'
@@ -127,7 +128,7 @@ jobs:
         if: steps.check.outputs.update_needed == 'true'
         run: dotnet nuget push ${{ env.OUTPUT_PATH }}/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
 
-      - name: Create GitHub Release
+      - name: Create GitHub Release (font)
         if: steps.check.outputs.update_needed == 'true'
         uses: softprops/action-gh-release@v2
         with:
@@ -146,4 +147,25 @@ jobs:
             ### Links
             - [NuGet Package](https://www.nuget.org/packages/${{ env.PACKAGE_NAME }}/${{ steps.latest.outputs.version }})
             - [Tabler Icons v${{ steps.latest.outputs.version }}](https://github.com/tabler/tabler-icons/releases/tag/v${{ steps.latest.outputs.version }})
-          files: ${{ env.OUTPUT_PATH }}/*.nupkg
+          files: ${{ env.OUTPUT_PATH }}/${{ env.PACKAGE_NAME }}.${{ steps.latest.outputs.version }}.nupkg
+
+      - name: Create GitHub Release (SVG)
+        if: steps.check.outputs.update_needed == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.latest.outputs.version }}-svg
+          name: v${{ steps.latest.outputs.version }}-svg
+          body: |
+            ## ${{ env.PACKAGE_NAME_SVG }} v${{ steps.latest.outputs.version }}
+
+            Automated update to Tabler Icons v${{ steps.latest.outputs.version }} (inline SVG backend with tree-shaking).
+
+            ### Installation
+            ```bash
+            dotnet add package ${{ env.PACKAGE_NAME_SVG }} --version ${{ steps.latest.outputs.version }}
+            ```
+
+            ### Links
+            - [NuGet Package](https://www.nuget.org/packages/${{ env.PACKAGE_NAME_SVG }}/${{ steps.latest.outputs.version }})
+            - [Tabler Icons v${{ steps.latest.outputs.version }}](https://github.com/tabler/tabler-icons/releases/tag/v${{ steps.latest.outputs.version }})
+          files: ${{ env.OUTPUT_PATH }}/${{ env.PACKAGE_NAME_SVG }}.${{ steps.latest.outputs.version }}.nupkg
