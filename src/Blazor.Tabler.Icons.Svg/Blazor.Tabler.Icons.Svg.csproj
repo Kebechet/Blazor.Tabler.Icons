@@ -19,8 +19,8 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>3.44.0.3</Version>
-    <PackageReleaseNotes>3.44.0.3: add [assembly: IncludeAllTablerIcons] to include every icon and disable tree-shaking for galleries/showcases/runtime icon-pickers. Tree-shaking SVG backend - a source generator inlines only the icons you reference (via the shared TablerIconType enum), so unused icons never ship; font aliases resolve to their canonical SVG for full coverage.</PackageReleaseNotes>
+    <Version>3.45.0</Version>
+    <PackageReleaseNotes>SVG backend for Tabler Icons v3.45.0</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
