@@ -19,8 +19,8 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>3.45.0</Version>
-    <PackageReleaseNotes>SVG backend for Tabler Icons v3.45.0</PackageReleaseNotes>
+    <Version>3.45.0.1</Version>
+    <PackageReleaseNotes>Fix false TABLERSVG001/TABLERSVG002 warnings: markup names are validated against real enum members, and wrapper components forwarding an IconType? (x.Value) are no longer flagged as dynamic.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
