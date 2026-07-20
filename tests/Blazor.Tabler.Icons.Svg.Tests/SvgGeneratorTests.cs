@@ -222,6 +222,22 @@ public class SvgGeneratorTests
     }
 
     [Fact]
+    public void StillReportsDynamicUsage_ForNullableFieldUnwrap()
+    {
+        // Arrange - a runtime-selected nullable field unwrapped via `.Value` is still dynamic:
+        // `_icon` is not a forwarded component parameter, so the concrete icon is not statically known.
+        var razor = new InMemoryAdditionalText(
+            "Widget.razor",
+            "<TablerIcon Type=\"@_icon.Value\" />");
+
+        // Act
+        var (_, diagnostics) = RunGenerator("public class Empty { }", razor);
+
+        // Assert
+        Assert.Contains(diagnostics, d => d.Id == "TABLERSVG001");
+    }
+
+    [Fact]
     public void Resolves_FontAlias_ToCanonicalSvg()
     {
         // Arrange - Discount2 is a font alias (-> rosette-discount); alias resolution fills its SVG.

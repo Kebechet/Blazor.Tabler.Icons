@@ -344,8 +344,11 @@ public sealed class TablerSvgGenerator : IIncrementalGenerator
         "<" + ComponentName + "\\b[^>]*?\\bType\\s*=\\s*\"(?<v>[^\"]*)\"",
         RegexOptions.Compiled | RegexOptions.Singleline);
 
+    // A forwarded component parameter is a single PascalCase identifier (`Type`, `Icon`), optionally
+    // `this.`-qualified. A runtime-selected field (`_icon`) or a property path (`Model.Icon`) is not,
+    // so its `.Value` unwrap still counts as dynamic usage.
     private static readonly Regex ForwardedNullableUnwrap = new(
-        @"^\s*@?[A-Za-z_][A-Za-z0-9_.]*\.(Value|GetValueOrDefault\(\))\s*$",
+        @"^\s*@?(this\.)?[A-Z][A-Za-z0-9]*\.(Value|GetValueOrDefault\(\))\s*$",
         RegexOptions.Compiled);
 
     private static readonly Lazy<IReadOnlyDictionary<string, SvgEntry>> Dataset = new(LoadDataset);
