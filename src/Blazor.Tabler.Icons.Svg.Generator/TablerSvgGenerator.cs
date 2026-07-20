@@ -133,6 +133,8 @@ public sealed class TablerSvgGenerator : IIncrementalGenerator
         }
         else
         {
+            var enumMemberNames = GetEnumMemberNames(compilation);
+
             foreach (var name in csharpNames)
             {
                 if (name is not null)
@@ -146,7 +148,14 @@ public sealed class TablerSvgGenerator : IIncrementalGenerator
             {
                 foreach (var name in scan.Names)
                 {
-                    used.Add(name);
+                    // Markup names come from a text scan with no semantic model, so a member access
+                    // on a variable that merely shares the alias's name (e.g. an `IconType? IconType`
+                    // parameter unwrapped via `IconType.Value`) yields a non-icon token. Only real
+                    // enum members can carry SVG data, so anything else is a false positive here.
+                    if (enumMemberNames.Contains(name))
+                    {
+                        used.Add(name);
+                    }
                 }
 
                 hasDynamicUsage |= scan.HasDynamicUsage;
@@ -206,6 +215,26 @@ public sealed class TablerSvgGenerator : IIncrementalGenerator
         }
 
         return false;
+    }
+
+    private static HashSet<string> GetEnumMemberNames(Compilation compilation)
+    {
+        var names = new HashSet<string>(StringComparer.Ordinal);
+        var enumType = compilation.GetTypeByMetadataName(EnumMetadataName);
+        if (enumType is null)
+        {
+            return names;
+        }
+
+        foreach (var member in enumType.GetMembers().OfType<IFieldSymbol>())
+        {
+            if (member.HasConstantValue)
+            {
+                names.Add(member.Name);
+            }
+        }
+
+        return names;
     }
 
     private static IEnumerable<string> ReadIncludeAttributeNames(Compilation compilation)
@@ -291,11 +320,21 @@ public sealed class TablerSvgGenerator : IIncrementalGenerator
         foreach (Match match in ComponentTypeAttribute.Matches(text))
         {
             var value = match.Groups["v"].Value;
-            if (!tokens.Any(token => value.Contains(token + ".")))
+            if (tokens.Any(token => value.Contains(token + ".")))
             {
-                hasDynamicUsage = true;
-                break;
+                continue;
             }
+
+            // A wrapper component that forwards an `IconType?` unwraps it as `x.Value` /
+            // `x.GetValueOrDefault()`. That is not a selection site - the concrete icons come from
+            // the wrapper's call sites, which are scanned separately - so it must not count as dynamic.
+            if (ForwardedNullableUnwrap.IsMatch(value))
+            {
+                continue;
+            }
+
+            hasDynamicUsage = true;
+            break;
         }
 
         return new MarkupScan(names.ToImmutableArray(), hasDynamicUsage);
@@ -304,6 +343,13 @@ public sealed class TablerSvgGenerator : IIncrementalGenerator
     private static readonly Regex ComponentTypeAttribute = new(
         "<" + ComponentName + "\\b[^>]*?\\bType\\s*=\\s*\"(?<v>[^\"]*)\"",
         RegexOptions.Compiled | RegexOptions.Singleline);
+
+    // A forwarded component parameter is a single PascalCase identifier (`Type`, `Icon`), optionally
+    // `this.`-qualified. A runtime-selected field (`_icon`) or a property path (`Model.Icon`) is not,
+    // so its `.Value` unwrap still counts as dynamic usage.
+    private static readonly Regex ForwardedNullableUnwrap = new(
+        @"^\s*@?(this\.)?[A-Z][A-Za-z0-9]*\.(Value|GetValueOrDefault\(\))\s*$",
+        RegexOptions.Compiled);
 
     private static readonly Lazy<IReadOnlyDictionary<string, SvgEntry>> Dataset = new(LoadDataset);
 

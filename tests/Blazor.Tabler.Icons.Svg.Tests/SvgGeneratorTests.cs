@@ -174,6 +174,70 @@ public class SvgGeneratorTests
     }
 
     [Fact]
+    public void DoesNotWarn_ForMemberAccess_OnVariableNamedLikeAlias()
+    {
+        // Arrange - a parameter named `IconType` (same as the enum alias) unwrapped via `.Value`
+        // in markup; the text scanner must not treat the trailing `Value` token as an icon.
+        const string source = "global using IconType = Blazor.Tabler.Icons.TablerIconType;";
+        var razor = new InMemoryAdditionalText(
+            "TileChip.razor",
+            "<Icon Type=\"@IconType.Value\" />");
+
+        // Act
+        var (generated, diagnostics) = RunGenerator(source, razor);
+
+        // Assert
+        Assert.DoesNotContain(diagnostics, d => d.Id == "TABLERSVG002");
+        Assert.DoesNotContain("TablerIconType.Value", generated);
+    }
+
+    [Fact]
+    public void DoesNotReportDynamicUsage_ForForwardedNullableValue()
+    {
+        // Arrange - a wrapper component forwarding an `IconType?` as `Type.Value`.
+        var razor = new InMemoryAdditionalText(
+            "Icon.razor",
+            "<TablerIcon Type=\"Type.Value\" />");
+
+        // Act
+        var (_, diagnostics) = RunGenerator("public class Empty { }", razor);
+
+        // Assert
+        Assert.DoesNotContain(diagnostics, d => d.Id == "TABLERSVG001");
+    }
+
+    [Fact]
+    public void StillReportsDynamicUsage_ForBareRuntimeField()
+    {
+        // Arrange - a genuinely runtime-selected icon (bare field), not a forwarded nullable unwrap.
+        var razor = new InMemoryAdditionalText(
+            "Widget.razor",
+            "<TablerIcon Type=\"@_icon\" />");
+
+        // Act
+        var (_, diagnostics) = RunGenerator("public class Empty { }", razor);
+
+        // Assert
+        Assert.Contains(diagnostics, d => d.Id == "TABLERSVG001");
+    }
+
+    [Fact]
+    public void StillReportsDynamicUsage_ForNullableFieldUnwrap()
+    {
+        // Arrange - a runtime-selected nullable field unwrapped via `.Value` is still dynamic:
+        // `_icon` is not a forwarded component parameter, so the concrete icon is not statically known.
+        var razor = new InMemoryAdditionalText(
+            "Widget.razor",
+            "<TablerIcon Type=\"@_icon.Value\" />");
+
+        // Act
+        var (_, diagnostics) = RunGenerator("public class Empty { }", razor);
+
+        // Assert
+        Assert.Contains(diagnostics, d => d.Id == "TABLERSVG001");
+    }
+
+    [Fact]
     public void Resolves_FontAlias_ToCanonicalSvg()
     {
         // Arrange - Discount2 is a font alias (-> rosette-discount); alias resolution fills its SVG.
