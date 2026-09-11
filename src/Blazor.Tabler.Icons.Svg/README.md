@@ -91,7 +91,7 @@ This registers every icon and disables tree-shaking, so any icon renders no matt
 
 ## More
 
-Full docs and the font variant: [github.com/Kebechet/Blazor.Icons.Tabler](https://github.com/Kebechet/Blazor.Icons.Tabler)
+Full docs and the font variant: [github.com/Kebechet/Blazor.Tabler.Icons](https://github.com/Kebechet/Blazor.Tabler.Icons)
 
 ## License
 
