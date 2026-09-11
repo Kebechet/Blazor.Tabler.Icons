@@ -12,8 +12,8 @@
     <IsPackable>true</IsPackable>
     <PackageId>Kebechet.Blazor.Tabler.Icons</PackageId>
     <Description>Tabler Icons for Blazor with strongly-typed enums, constants, and O(1) lookups. 5000+ icons included. Automatically updated when new Tabler Icons are released.</Description>
-    <RepositoryUrl>https://github.com/Kebechet/Blazor.Icons.Tabler</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/Kebechet/Blazor.Icons.Tabler</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Kebechet/Blazor.Tabler.Icons</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Kebechet/Blazor.Tabler.Icons</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryType>git</RepositoryType>

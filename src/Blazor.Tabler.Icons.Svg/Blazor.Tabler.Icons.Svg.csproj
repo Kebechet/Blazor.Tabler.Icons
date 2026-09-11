@@ -12,8 +12,8 @@
     <IsPackable>true</IsPackable>
     <PackageId>Kebechet.Blazor.Tabler.Icons.Svg</PackageId>
     <Description>Tree-shaking SVG Tabler Icons for Blazor. A source generator inlines only the icons you reference, so unused icons never ship. Strongly-typed via the same TablerIconType enum.</Description>
-    <RepositoryUrl>https://github.com/Kebechet/Blazor.Icons.Tabler</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/Kebechet/Blazor.Icons.Tabler</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Kebechet/Blazor.Tabler.Icons</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Kebechet/Blazor.Tabler.Icons</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryType>git</RepositoryType>

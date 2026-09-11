@@ -59,7 +59,7 @@ Sizing/coloring use `font-size` and `color` (it is a font), e.g. `Style="font-si
 
 ## More
 
-Full docs, the SVG variant, and design notes: [github.com/Kebechet/Blazor.Icons.Tabler](https://github.com/Kebechet/Blazor.Icons.Tabler)
+Full docs, the SVG variant, and design notes: [github.com/Kebechet/Blazor.Tabler.Icons](https://github.com/Kebechet/Blazor.Tabler.Icons)
 
 ## License
 
