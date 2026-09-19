@@ -77,6 +77,8 @@ public static class TablerIconConstants
     public const string AirConditioning = "ti ti-air-conditioning";
     public const string AirConditioningDisabled = "ti ti-air-conditioning-disabled";
     public const string AirTrafficControl = "ti ti-air-traffic-control";
+    public const string AirpodsL = "ti ti-airpods-l";
+    public const string AirpodsR = "ti ti-airpods-r";
     public const string Alarm = "ti ti-alarm";
     public const string AlarmAverage = "ti ti-alarm-average";
     public const string AlarmFilled = "tif tif-alarm";
@@ -1471,6 +1473,7 @@ public static class TablerIconConstants
     public const string CashBanknoteMoveBack = "ti ti-cash-banknote-move-back";
     public const string CashBanknoteOff = "ti ti-cash-banknote-off";
     public const string CashBanknotePlus = "ti ti-cash-banknote-plus";
+    public const string CashCoin = "ti ti-cash-coin";
     public const string CashEdit = "ti ti-cash-edit";
     public const string CashHeart = "ti ti-cash-heart";
     public const string CashMinus = "ti ti-cash-minus";
@@ -2645,6 +2648,7 @@ public static class TablerIconConstants
     public const string EaseOutControlPoint = "ti ti-ease-out-control-point";
     public const string EaseOutControlPointFilled = "tif tif-ease-out-control-point";
     public const string Edit = "ti ti-edit";
+    public const string EditBulk = "ti ti-edit-bulk";
     public const string EditCircle = "ti ti-edit-circle";
     public const string EditCircleOff = "ti ti-edit-circle-off";
     public const string EditFilled = "tif tif-edit";
@@ -3043,8 +3047,10 @@ public static class TablerIconConstants
     public const string FolderSearch = "ti ti-folder-search";
     public const string FolderShare = "ti ti-folder-share";
     public const string FolderStar = "ti ti-folder-star";
+    public const string FolderStats = "ti ti-folder-stats";
     public const string FolderSymlink = "ti ti-folder-symlink";
     public const string FolderUp = "ti ti-folder-up";
+    public const string FolderUser = "ti ti-folder-user";
     public const string FolderX = "ti ti-folder-x";
     public const string Folders = "ti ti-folders";
     public const string FoldersFilled = "tif tif-folders";
@@ -3149,6 +3155,8 @@ public static class TablerIconConstants
     public const string GolfOff = "ti ti-golf-off";
     public const string Gps = "ti ti-gps";
     public const string GpsFilled = "tif tif-gps";
+    public const string Gpu = "ti ti-gpu";
+    public const string Gpu2 = "ti ti-gpu-2";
     public const string Gradienter = "ti ti-gradienter";
     public const string Grain = "ti ti-grain";
     public const string Grape = "ti ti-grape";
@@ -3946,6 +3954,7 @@ public static class TablerIconConstants
     public const string MapPinStar = "ti ti-map-pin-star";
     public const string MapPinUp = "ti ti-map-pin-up";
     public const string MapPinX = "ti ti-map-pin-x";
+    public const string MapPinned = "ti ti-map-pinned";
     public const string MapPins = "ti ti-map-pins";
     public const string MapPlus = "ti ti-map-plus";
     public const string MapQuestion = "ti ti-map-question";
@@ -4466,6 +4475,9 @@ public static class TablerIconConstants
     public const string Om = "ti ti-om";
     public const string Omega = "ti ti-omega";
     public const string Option = "ti ti-option";
+    public const string Orbit = "ti ti-orbit";
+    public const string OrbitVertical = "ti ti-orbit-vertical";
+    public const string Orbits = "ti ti-orbits";
     public const string Outbound = "ti ti-outbound";
     public const string Outlet = "ti ti-outlet";
     public const string Oval = "ti ti-oval";
@@ -4911,6 +4923,8 @@ public static class TablerIconConstants
     public const string RectangularPrismPlus = "ti ti-rectangular-prism-plus";
     public const string Recycle = "ti ti-recycle";
     public const string RecycleOff = "ti ti-recycle-off";
+    public const string ReduceMotion = "ti ti-reduce-motion";
+    public const string ReferenceImage = "ti ti-reference-image";
     public const string Refresh = "ti ti-refresh";
     public const string RefreshAlert = "ti ti-refresh-alert";
     public const string RefreshDot = "ti ti-refresh-dot";
@@ -5094,6 +5108,7 @@ public static class TablerIconConstants
     public const string Search = "ti ti-search";
     public const string SearchFilled = "tif tif-search";
     public const string SearchOff = "ti ti-search-off";
+    public const string SecretPhrases = "ti ti-secret-phrases";
     public const string Section = "ti ti-section";
     public const string SectionFilled = "tif tif-section";
     public const string SectionSign = "ti ti-section-sign";
@@ -5651,6 +5666,7 @@ public static class TablerIconConstants
     public const string StethoscopeOff = "ti ti-stethoscope-off";
     public const string Sticker = "ti ti-sticker";
     public const string Sticker2 = "ti ti-sticker-2";
+    public const string StickerSmile = "ti ti-sticker-smile";
     public const string Stopwatch = "ti ti-stopwatch";
     public const string Storm = "ti ti-storm";
     public const string StormOff = "ti ti-storm-off";
@@ -6072,6 +6088,8 @@ public static class TablerIconConstants
     public const string VirusSearch = "ti ti-virus-search";
     public const string Vocabulary = "ti ti-vocabulary";
     public const string VocabularyOff = "ti ti-vocabulary-off";
+    public const string Voice = "ti ti-voice";
+    public const string Voice2 = "ti ti-voice-2";
     public const string Volcano = "ti ti-volcano";
     public const string Volume = "ti ti-volume";
     public const string Volume2 = "ti ti-volume-2";

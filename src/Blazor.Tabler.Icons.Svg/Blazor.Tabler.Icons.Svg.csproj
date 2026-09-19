@@ -19,8 +19,8 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>3.46.0</Version>
-    <PackageReleaseNotes>SVG backend for Tabler Icons v3.46.0</PackageReleaseNotes>
+    <Version>3.47.0</Version>
+    <PackageReleaseNotes>SVG backend for Tabler Icons v3.47.0</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
