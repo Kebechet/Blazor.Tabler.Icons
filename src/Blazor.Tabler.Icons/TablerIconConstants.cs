@@ -2633,6 +2633,7 @@ public static class TablerIconConstants
     public const string Dumbbell = "ti ti-dumbbell";
     public const string Dumpling = "ti ti-dumpling";
     public const string DumplingFilled = "tif tif-dumpling";
+    public const string Duplicate = "ti ti-duplicate";
     public const string EPassport = "ti ti-e-passport";
     public const string Ear = "ti ti-ear";
     public const string EarOff = "ti ti-ear-off";
@@ -3025,6 +3026,7 @@ public static class TablerIconConstants
     public const string FoldDown = "ti ti-fold-down";
     public const string FoldUp = "ti ti-fold-up";
     public const string Folder = "ti ti-folder";
+    public const string FolderAi = "ti ti-folder-ai";
     public const string FolderBolt = "ti ti-folder-bolt";
     public const string FolderCancel = "ti ti-folder-cancel";
     public const string FolderCheck = "ti ti-folder-check";
@@ -3046,6 +3048,7 @@ public static class TablerIconConstants
     public const string FolderRoot = "ti ti-folder-root";
     public const string FolderSearch = "ti ti-folder-search";
     public const string FolderShare = "ti ti-folder-share";
+    public const string FolderSparkle = "ti ti-folder-sparkle";
     public const string FolderStar = "ti ti-folder-star";
     public const string FolderStats = "ti ti-folder-stats";
     public const string FolderSymlink = "ti ti-folder-symlink";
@@ -3127,16 +3130,21 @@ public static class TablerIconConstants
     public const string GiftFilled = "tif tif-gift";
     public const string GiftOff = "ti ti-gift-off";
     public const string GitBranch = "ti ti-git-branch";
+    public const string GitBranchCheck = "ti ti-git-branch-check";
     public const string GitBranchDeleted = "ti ti-git-branch-deleted";
+    public const string GitBranchX = "ti ti-git-branch-x";
     public const string GitCherryPick = "ti ti-git-cherry-pick";
     public const string GitCommit = "ti ti-git-commit";
     public const string GitCompare = "ti ti-git-compare";
     public const string GitFork = "ti ti-git-fork";
     public const string GitMerge = "ti ti-git-merge";
+    public const string GitMergeQueue = "ti ti-git-merge-queue";
     public const string GitPullRequest = "ti ti-git-pull-request";
     public const string GitPullRequestClosed = "ti ti-git-pull-request-closed";
     public const string GitPullRequestConflict = "ti ti-git-pull-request-conflict";
     public const string GitPullRequestDraft = "ti ti-git-pull-request-draft";
+    public const string GitPullRequestLocked = "ti ti-git-pull-request-locked";
+    public const string GitPullRequestUnlisted = "ti ti-git-pull-request-unlisted";
     public const string Gizmo = "ti ti-gizmo";
     public const string Glass = "ti ti-glass";
     public const string GlassChampagne = "ti ti-glass-champagne";
@@ -4044,6 +4052,7 @@ public static class TablerIconConstants
     public const string Mesh = "ti ti-mesh";
     public const string Message = "ti ti-message";
     public const string Message2 = "ti ti-message-2";
+    public const string Message2Ai = "ti ti-message-2-ai";
     public const string Message2Bolt = "ti ti-message-2-bolt";
     public const string Message2Cancel = "ti ti-message-2-cancel";
     public const string Message2Check = "ti ti-message-2-check";
@@ -4062,9 +4071,11 @@ public static class TablerIconConstants
     public const string Message2Question = "ti ti-message-2-question";
     public const string Message2Search = "ti ti-message-2-search";
     public const string Message2Share = "ti ti-message-2-share";
+    public const string Message2Sparkle = "ti ti-message-2-sparkle";
     public const string Message2Star = "ti ti-message-2-star";
     public const string Message2Up = "ti ti-message-2-up";
     public const string Message2X = "ti ti-message-2-x";
+    public const string MessageAi = "ti ti-message-ai";
     public const string MessageBolt = "ti ti-message-bolt";
     public const string MessageCancel = "ti ti-message-cancel";
     public const string MessageChatbot = "ti ti-message-chatbot";
@@ -4116,6 +4127,7 @@ public static class TablerIconConstants
     public const string MessageReportFilled = "tif tif-message-report";
     public const string MessageSearch = "ti ti-message-search";
     public const string MessageShare = "ti ti-message-share";
+    public const string MessageSparkle = "ti ti-message-sparkle";
     public const string MessageStar = "ti ti-message-star";
     public const string MessageUp = "ti ti-message-up";
     public const string MessageUser = "ti ti-message-user";
@@ -4162,6 +4174,7 @@ public static class TablerIconConstants
     public const string MistOff = "ti ti-mist-off";
     public const string Mobiledata = "ti ti-mobiledata";
     public const string MobiledataOff = "ti ti-mobiledata-off";
+    public const string ModelAi = "ti ti-model-ai";
     public const string Moneybag = "ti ti-moneybag";
     public const string MoneybagEdit = "ti ti-moneybag-edit";
     public const string MoneybagHeart = "ti ti-moneybag-heart";
@@ -4528,6 +4541,7 @@ public static class TablerIconConstants
     public const string Pdf = "ti ti-pdf";
     public const string Peace = "ti ti-peace";
     public const string Pencil = "ti ti-pencil";
+    public const string PencilAi = "ti ti-pencil-ai";
     public const string PencilBolt = "ti ti-pencil-bolt";
     public const string PencilCancel = "ti ti-pencil-cancel";
     public const string PencilCheck = "ti ti-pencil-check";
@@ -5637,12 +5651,16 @@ public static class TablerIconConstants
     public const string Stack3Filled = "tif tif-stack-3";
     public const string StackBack = "ti ti-stack-back";
     public const string StackBackward = "ti ti-stack-backward";
+    public const string StackCheck = "ti ti-stack-check";
     public const string StackFilled = "tif tif-stack";
     public const string StackForward = "ti ti-stack-forward";
     public const string StackFront = "ti ti-stack-front";
     public const string StackMiddle = "ti ti-stack-middle";
+    public const string StackMinus = "ti ti-stack-minus";
+    public const string StackPlus = "ti ti-stack-plus";
     public const string StackPop = "ti ti-stack-pop";
     public const string StackPush = "ti ti-stack-push";
+    public const string StackX = "ti ti-stack-x";
     public const string Stairs = "ti ti-stairs";
     public const string StairsDown = "ti ti-stairs-down";
     public const string StairsUp = "ti ti-stairs-up";
