@@ -152,9 +152,14 @@ public static class TablerIconConstants
     public const string Alpha = "ti ti-alpha";
     public const string AlphabetArabic = "ti ti-alphabet-arabic";
     public const string AlphabetBangla = "ti ti-alphabet-bangla";
+    public const string AlphabetChinese = "ti ti-alphabet-chinese";
     public const string AlphabetCyrillic = "ti ti-alphabet-cyrillic";
+    public const string AlphabetDevanagari = "ti ti-alphabet-devanagari";
+    public const string AlphabetEthiopic = "ti ti-alphabet-ethiopic";
+    public const string AlphabetGeorgian = "ti ti-alphabet-georgian";
     public const string AlphabetGreek = "ti ti-alphabet-greek";
     public const string AlphabetHebrew = "ti ti-alphabet-hebrew";
+    public const string AlphabetJapanese = "ti ti-alphabet-japanese";
     public const string AlphabetKorean = "ti ti-alphabet-korean";
     public const string AlphabetLatin = "ti ti-alphabet-latin";
     public const string AlphabetPolish = "ti ti-alphabet-polish";
@@ -676,6 +681,7 @@ public static class TablerIconConstants
     public const string BlenderFilled = "tif tif-blender";
     public const string Blind = "ti ti-blind";
     public const string Blob = "ti ti-blob";
+    public const string BlobDashed = "ti ti-blob-dashed";
     public const string BlobFilled = "tif tif-blob";
     public const string Blockquote = "ti ti-blockquote";
     public const string Blocks = "ti ti-blocks";
@@ -1745,6 +1751,7 @@ public static class TablerIconConstants
     public const string CircleHalf = "ti ti-circle-half";
     public const string CircleHalf2 = "ti ti-circle-half-2";
     public const string CircleHalfVertical = "ti ti-circle-half-vertical";
+    public const string CircleHeart = "ti ti-circle-heart";
     public const string CircleKey = "ti ti-circle-key";
     public const string CircleKeyFilled = "tif tif-circle-key";
     public const string CircleLetterA = "ti ti-circle-letter-a";
@@ -1826,8 +1833,10 @@ public static class TablerIconConstants
     public const string CircleOpenArrowLeft = "ti ti-circle-open-arrow-left";
     public const string CircleOpenArrowRight = "ti ti-circle-open-arrow-right";
     public const string CircleOpenArrowUp = "ti ti-circle-open-arrow-up";
+    public const string CirclePause = "ti ti-circle-pause";
     public const string CirclePercentage = "ti ti-circle-percentage";
     public const string CirclePercentageFilled = "tif tif-circle-percentage";
+    public const string CirclePlay = "ti ti-circle-play";
     public const string CirclePlus = "ti ti-circle-plus";
     public const string CirclePlus2 = "ti ti-circle-plus-2";
     public const string CirclePlusFilled = "tif tif-circle-plus";
@@ -1836,6 +1845,7 @@ public static class TablerIconConstants
     public const string CircleRectangleFilled = "tif tif-circle-rectangle";
     public const string CircleRectangleOff = "ti ti-circle-rectangle-off";
     public const string CircleSquare = "ti ti-circle-square";
+    public const string CircleStop = "ti ti-circle-stop";
     public const string CircleTriangle = "ti ti-circle-triangle";
     public const string CircleX = "ti ti-circle-x";
     public const string CircleXFilled = "tif tif-circle-x";
@@ -2817,6 +2827,7 @@ public static class TablerIconConstants
     public const string FileLambda = "ti ti-file-lambda";
     public const string FileLambdaFilled = "tif tif-file-lambda";
     public const string FileLike = "ti ti-file-like";
+    public const string FileLock = "ti ti-file-lock";
     public const string FileMinus = "ti ti-file-minus";
     public const string FileMinusFilled = "tif tif-file-minus";
     public const string FileMusic = "ti ti-file-music";
@@ -3037,6 +3048,7 @@ public static class TablerIconConstants
     public const string FolderExclamation = "ti ti-folder-exclamation";
     public const string FolderFilled = "tif tif-folder";
     public const string FolderHeart = "ti ti-folder-heart";
+    public const string FolderLock = "ti ti-folder-lock";
     public const string FolderMinus = "ti ti-folder-minus";
     public const string FolderOff = "ti ti-folder-off";
     public const string FolderOpen = "ti ti-folder-open";
@@ -3703,6 +3715,8 @@ public static class TablerIconConstants
     public const string Lemon = "ti ti-lemon";
     public const string Lemon2 = "ti ti-lemon-2";
     public const string Lemon2Filled = "tif tif-lemon-2";
+    public const string LensConcave = "ti ti-lens-concave";
+    public const string LensConvex = "ti ti-lens-convex";
     public const string LetterA = "ti ti-letter-a";
     public const string LetterASmall = "ti ti-letter-a-small";
     public const string LetterB = "ti ti-letter-b";
@@ -4041,6 +4055,7 @@ public static class TablerIconConstants
     public const string MeepleFilled = "tif tif-meeple";
     public const string Melon = "ti ti-melon";
     public const string MelonFilled = "tif tif-melon";
+    public const string Memory = "ti ti-memory";
     public const string Menorah = "ti ti-menorah";
     public const string Menu = "ti ti-menu";
     public const string Menu2 = "ti ti-menu-2";
@@ -5413,6 +5428,8 @@ public static class TablerIconConstants
     public const string SquareChevronsUp = "ti ti-square-chevrons-up";
     public const string SquareChevronsUpFilled = "tif tif-square-chevrons-up";
     public const string SquareDashed = "ti ti-square-dashed";
+    public const string SquareDashedTopSolid = "ti ti-square-dashed-top-solid";
+    public const string SquareDashedX = "ti ti-square-dashed-x";
     public const string SquareDot = "ti ti-square-dot";
     public const string SquareDotFilled = "tif tif-square-dot";
     public const string SquareF0 = "ti ti-square-f0";
@@ -5967,6 +5984,7 @@ public static class TablerIconConstants
     public const string TrendingUp3 = "ti ti-trending-up-3";
     public const string TrendingUpDown = "ti ti-trending-up-down";
     public const string Triangle = "ti ti-triangle";
+    public const string TriangleDashed = "ti ti-triangle-dashed";
     public const string TriangleFilled = "tif tif-triangle";
     public const string TriangleInverted = "ti ti-triangle-inverted";
     public const string TriangleInvertedFilled = "tif tif-triangle-inverted";
