@@ -19,8 +19,8 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>3.49.0</Version>
-    <PackageReleaseNotes>SVG backend for Tabler Icons v3.49.0</PackageReleaseNotes>
+    <Version>3.49.0.1</Version>
+    <PackageReleaseNotes>Opt-in SVG sprite mode: wrap content in &lt;TablerIconSprite&gt; to render each icon's paths once, as a hidden &lt;symbol&gt;, and every TablerIcon inside it as a &lt;use&gt; reference. TablerIcon.SvgMode or a cascaded TablerSvgMode keeps single icons or whole subtrees inline. Apps that do not add the host render exactly as before.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,6 +42,10 @@
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Blazor.Tabler.Icons.Svg.Tests" />
   </ItemGroup>
 
   <ItemGroup>

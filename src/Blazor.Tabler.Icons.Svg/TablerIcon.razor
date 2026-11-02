@@ -14,7 +14,14 @@
          class="@CssClass"
          style="@Style"
          @attributes="Attributes">
-        @_inner
+        @if (_isSprite)
+        {
+            <use href="@_symbolHref"></use>
+        }
+        else
+        {
+            @_inner
+        }
     </svg>
 }
 
@@ -61,9 +68,28 @@
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object>? Attributes { get; set; }
 
+    /// <summary>
+    /// Overrides the <see cref="TablerSvgMode"/> this icon would otherwise take from a surrounding
+    /// <see cref="TablerIconSprite"/> or cascaded <see cref="TablerSvgMode"/>. <c>null</c> (the default)
+    /// inherits it, and with nothing to inherit the icon renders inline.
+    /// </summary>
+    /// <remarks>
+    /// Use <see cref="TablerSvgMode.Inline"/> for icons inside an element that is copied out of the page,
+    /// e.g. captured with html-to-image: the copy does not carry the sprite, so a
+    /// <c>&lt;use&gt;</c> reference in it renders blank. <see cref="TablerSvgMode.Sprite"/> without a
+    /// <see cref="TablerIconSprite"/> anywhere in the document also renders blank.
+    /// </remarks>
+    [Parameter]
+    public TablerSvgMode? SvgMode { get; set; }
+
+    [CascadingParameter]
+    private TablerSvgMode CascadingSvgMode { get; set; }
+
     private bool _hasIcon;
     private bool _isFilled;
+    private bool _isSprite;
     private MarkupString _inner;
+    private string? _symbolHref;
 
     private string _fill => _isFilled ? "currentColor" : "none";
     private string _stroke => _isFilled ? "none" : "currentColor";
@@ -79,7 +105,9 @@
         {
             _hasIcon = true;
             _isFilled = entry.IsFilled;
+            _isSprite = (SvgMode ?? CascadingSvgMode) == TablerSvgMode.Sprite;
             _inner = new MarkupString(entry.Inner);
+            _symbolHref = _isSprite ? $"#{TablerSpriteSheet.GetSymbolId(Type)}" : null;
         }
         else
         {
