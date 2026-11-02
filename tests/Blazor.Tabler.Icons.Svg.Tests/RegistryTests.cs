@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Blazor.Tabler.Icons.Svg.Tests;
 
+[Collection(RegistryCollection.Name)]
 public class RegistryTests
 {
     private const int RoundCount = 50;
