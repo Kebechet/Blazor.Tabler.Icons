@@ -45,6 +45,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="Blazor.Tabler.Icons.Svg.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Blazor.Tabler.Icons.Svg.Generator\Blazor.Tabler.Icons.Svg.Generator.csproj"
                       OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
   </ItemGroup>
