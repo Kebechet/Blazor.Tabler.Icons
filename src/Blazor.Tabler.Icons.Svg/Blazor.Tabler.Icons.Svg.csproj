@@ -19,8 +19,8 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>3.53.0.1</Version>
-    <PackageReleaseNotes>Fix: TablerSvgRegistry is now thread-safe, so module initializers of several assemblies registering icons at the same time no longer corrupt it or throw.</PackageReleaseNotes>
+    <Version>3.53.0.2</Version>
+    <PackageReleaseNotes>Opt-in SVG sprite mode: wrap content in &lt;TablerIconSprite&gt; to render each icon's paths once, as a hidden &lt;symbol&gt;, and every TablerIcon inside it as a &lt;use&gt; reference. TablerIcon.SvgMode or a cascaded TablerSvgMode keeps single icons or whole subtrees inline. Apps that do not add the host render exactly as before.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
