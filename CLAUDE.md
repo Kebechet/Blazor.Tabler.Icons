@@ -19,9 +19,9 @@ An app uses **one** backend; switching is a package swap.
 |------|---------|
 | `src/Core` | Shared project (`.shproj` + `.projitems`) holding the generated `TablerIconType` enum. Linked into both packages via `<Import Project="..\Core\Core.projitems" Label="Shared" />` - **no separate NuGet**. |
 | `src/Blazor.Tabler.Icons` | Font package: `TablerIconConstants` (CSS classes), `TablerIconTypeExtensions.ToCssClass()`, `<TablerIcon>`, `wwwroot` woff2 + CSS. |
-| `src/Blazor.Tabler.Icons.Svg` | SVG package: `<TablerIcon>` (inline svg), `TablerSvgRegistry`, `IncludeTablerIconsAttribute`. |
+| `src/Blazor.Tabler.Icons.Svg` | SVG package: `<TablerIcon>` (inline svg, or a `<use>` in sprite mode), `<TablerIconSprite>` + internal `TablerSpriteSheet`, `TablerSvgMode`, `TablerSvgRegistry`, `IncludeTablerIconsAttribute`. |
 | `src/Blazor.Tabler.Icons.Svg.Generator` | Roslyn source generator (`netstandard2.0`) + embedded `TablerSvgData.txt` dataset (build-time only, never shipped to the browser). |
-| `tests/` | xUnit. `Blazor.Tabler.Icons.Tests` (font mapping) and `Blazor.Tabler.Icons.Svg.Tests` (generator: tree-shaking, aliases, diagnostics; registry). |
+| `tests/` | xUnit. `Blazor.Tabler.Icons.Tests` (font mapping) and `Blazor.Tabler.Icons.Svg.Tests` (generator: tree-shaking, aliases, diagnostics; registry; bUnit component markup for inline and sprite mode). |
 | `scripts/` | `.cs` generation scripts (see below). |
 | `src/Blazor.Tabler.Icons.slnx` | Solution. |
 
@@ -56,6 +56,8 @@ dotnet test  src/Blazor.Tabler.Icons.slnx -c Release
 ## Conventions & gotchas
 
 - **Sizing the SVG `<TablerIcon>`** is CSS-only (defaults to `width/height: 1em`): size via a font-size class (`text-2xl`) or a width/height class (`size-6`, `size-full`); color via `currentColor` (`text-red-500`); outline thickness via `stroke-*`. There is no `Size`/`SizePx` parameter.
+- **Sprite mode is opt-in and must not change inline output.** `<TablerIconSprite>` renders one `<symbol id="tabler-icon-{Name}">` per registered icon and cascades `TablerSvgMode.Sprite` to its child content; an icon's own `SvgMode` beats the nearest cascade, and with neither it renders inline. `TablerIconInlineTests` pins the inline markup byte for byte - an app that never uses the sprite must keep producing it. The registry raises an internal event on registration so an already-rendered sprite picks up icons from a class library whose module initializer runs later; the sheet unsubscribes in `Dispose` (pinned by a test).
+- **Component tests share the static registry.** Every test class that registers icons is in the `TablerSvgRegistry` xUnit collection and registers the same markup per icon (`TestIcons`), so classes do not race on it.
 - **Two distinct enum types.** Because Core is compiled into each package (shared source, not a shared DLL), `TablerIconType` has a separate identity in each. Fine for one-backend apps; a single project referencing **both** packages hits CS0433 (the test projects are split per backend for this reason).
 - **Packaging the generator:** the analyzer DLL is packed into `analyzers/dotnet/cs` by the `_IncludeGeneratorInPackage` target. It references the built generator DLL **by path** - do NOT invoke `<MSBuild Targets="Build">` during pack, because CI packs with `--no-build` and that throws "NoBuild was set but the Build target was invoked."
 - **MSBuild/XML:** XML comments cannot contain `--` (e.g. don't write `--no-build` in a `<!-- -->` comment).

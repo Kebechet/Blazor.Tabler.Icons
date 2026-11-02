@@ -1,0 +1,27 @@
+@namespace Blazor.Tabler.Icons.Svg
+
+@_spriteSheet
+@if (ChildContent is not null)
+{
+    <CascadingValue Value="TablerSvgMode.Sprite" IsFixed="true">
+        @ChildContent
+    </CascadingValue>
+}
+
+@code {
+    /// <summary>
+    /// The content whose <see cref="TablerIcon"/>s render in <see cref="TablerSvgMode.Sprite"/> mode,
+    /// typically the layout's <c>@Body</c>. Without it only the sprite is rendered, for icons that opt
+    /// in individually (<see cref="TablerIcon.SvgMode"/>) or through a cascading
+    /// <see cref="TablerSvgMode"/> of their own.
+    /// </summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    // Razor only resolves public components as tags, and the sheet is an internal detail.
+    private static readonly RenderFragment _spriteSheet = builder =>
+    {
+        builder.OpenComponent<TablerSpriteSheet>(0);
+        builder.CloseComponent();
+    };
+}
