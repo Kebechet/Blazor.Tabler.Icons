@@ -205,6 +205,7 @@ public static class TablerIconConstants
     public const string Archive = "ti ti-archive";
     public const string ArchiveFilled = "tif tif-archive";
     public const string ArchiveOff = "ti ti-archive-off";
+    public const string ArchiveRestore = "ti ti-archive-restore";
     public const string Armchair = "ti ti-armchair";
     public const string Armchair2 = "ti ti-armchair-2";
     public const string Armchair2Off = "ti ti-armchair-2-off";
@@ -613,6 +614,7 @@ public static class TablerIconConstants
     public const string BatteryVerticalFilled = "tif tif-battery-vertical";
     public const string BatteryVerticalOff = "ti ti-battery-vertical-off";
     public const string Beach = "ti ti-beach";
+    public const string BeachBag = "ti ti-beach-bag";
     public const string BeachOff = "ti ti-beach-off";
     public const string Bed = "ti ti-bed";
     public const string BedFilled = "tif tif-bed";
@@ -708,6 +710,7 @@ public static class TablerIconConstants
     public const string BongOff = "ti ti-bong-off";
     public const string Book = "ti ti-book";
     public const string Book2 = "ti ti-book-2";
+    public const string BookClone = "ti ti-book-clone";
     public const string BookDownload = "ti ti-book-download";
     public const string BookFilled = "tif tif-book";
     public const string BookOff = "ti ti-book-off";
@@ -1030,6 +1033,7 @@ public static class TablerIconConstants
     public const string BrandMetabrainz = "ti ti-brand-metabrainz";
     public const string BrandMinecraft = "ti ti-brand-minecraft";
     public const string BrandMiniprogram = "ti ti-brand-miniprogram";
+    public const string BrandMisskey = "ti ti-brand-misskey";
     public const string BrandMixpanel = "ti ti-brand-mixpanel";
     public const string BrandMonday = "ti ti-brand-monday";
     public const string BrandMongodb = "ti ti-brand-mongodb";
@@ -1180,6 +1184,7 @@ public static class TablerIconConstants
     public const string BrandVechain = "ti ti-brand-vechain";
     public const string BrandVercel = "ti ti-brand-vercel";
     public const string BrandVercelFilled = "tif tif-brand-vercel";
+    public const string BrandViber = "ti ti-brand-viber";
     public const string BrandVimeo = "ti ti-brand-vimeo";
     public const string BrandVimeoFilled = "tif tif-brand-vimeo";
     public const string BrandVinted = "ti ti-brand-vinted";
@@ -2282,6 +2287,7 @@ public static class TablerIconConstants
     public const string DatabaseStar = "ti ti-database-star";
     public const string DatabaseX = "ti ti-database-x";
     public const string Deaf = "ti ti-deaf";
+    public const string Decagram = "ti ti-decagram";
     public const string Decimal = "ti ti-decimal";
     public const string Deer = "ti ti-deer";
     public const string Delta = "ti ti-delta";
@@ -3150,12 +3156,16 @@ public static class TablerIconConstants
     public const string GitCompare = "ti ti-git-compare";
     public const string GitFork = "ti ti-git-fork";
     public const string GitMerge = "ti ti-git-merge";
+    public const string GitMergeAi = "ti ti-git-merge-ai";
     public const string GitMergeQueue = "ti ti-git-merge-queue";
     public const string GitPullRequest = "ti ti-git-pull-request";
     public const string GitPullRequestClosed = "ti ti-git-pull-request-closed";
+    public const string GitPullRequestClosedAi = "ti ti-git-pull-request-closed-ai";
     public const string GitPullRequestConflict = "ti ti-git-pull-request-conflict";
     public const string GitPullRequestDraft = "ti ti-git-pull-request-draft";
+    public const string GitPullRequestDraftAi = "ti ti-git-pull-request-draft-ai";
     public const string GitPullRequestLocked = "ti ti-git-pull-request-locked";
+    public const string GitPullRequestLockedAi = "ti ti-git-pull-request-locked-ai";
     public const string GitPullRequestUnlisted = "ti ti-git-pull-request-unlisted";
     public const string Gizmo = "ti ti-gizmo";
     public const string Glass = "ti ti-glass";
@@ -3888,6 +3898,7 @@ public static class TablerIconConstants
     public const string Logs = "ti ti-logs";
     public const string Lollipop = "ti ti-lollipop";
     public const string LollipopOff = "ti ti-lollipop-off";
+    public const string Loop = "ti ti-loop";
     public const string Luggage = "ti ti-luggage";
     public const string LuggageOff = "ti ti-luggage-off";
     public const string Lungs = "ti ti-lungs";
@@ -3978,6 +3989,7 @@ public static class TablerIconConstants
     public const string MapPinX = "ti ti-map-pin-x";
     public const string MapPinned = "ti ti-map-pinned";
     public const string MapPins = "ti ti-map-pins";
+    public const string MapPinsOff = "ti ti-map-pins-off";
     public const string MapPlus = "ti ti-map-plus";
     public const string MapQuestion = "ti ti-map-question";
     public const string MapRoute = "ti ti-map-route";
@@ -4042,6 +4054,7 @@ public static class TablerIconConstants
     public const string Matrix = "ti ti-matrix";
     public const string Maximize = "ti ti-maximize";
     public const string MaximizeOff = "ti ti-maximize-off";
+    public const string Mcp = "ti ti-mcp";
     public const string Meat = "ti ti-meat";
     public const string MeatOff = "ti ti-meat-off";
     public const string Medal = "ti ti-medal";
@@ -4502,6 +4515,7 @@ public static class TablerIconConstants
     public const string OlympicsOff = "ti ti-olympics-off";
     public const string Om = "ti ti-om";
     public const string Omega = "ti ti-omega";
+    public const string Opacity = "ti ti-opacity";
     public const string Option = "ti ti-option";
     public const string Orbit = "ti ti-orbit";
     public const string OrbitVertical = "ti ti-orbit-vertical";
@@ -4574,6 +4588,7 @@ public static class TablerIconConstants
     public const string PencilPin = "ti ti-pencil-pin";
     public const string PencilPlus = "ti ti-pencil-plus";
     public const string PencilQuestion = "ti ti-pencil-question";
+    public const string PencilRuler = "ti ti-pencil-ruler";
     public const string PencilSearch = "ti ti-pencil-search";
     public const string PencilShare = "ti ti-pencil-share";
     public const string PencilStar = "ti ti-pencil-star";
@@ -5317,6 +5332,7 @@ public static class TablerIconConstants
     public const string SmartHomeOff = "ti ti-smart-home-off";
     public const string Smoking = "ti ti-smoking";
     public const string SmokingNo = "ti ti-smoking-no";
+    public const string Snail = "ti ti-snail";
     public const string Snowboarding = "ti ti-snowboarding";
     public const string Snowflake = "ti ti-snowflake";
     public const string SnowflakeOff = "ti ti-snowflake-off";
@@ -6176,6 +6192,7 @@ public static class TablerIconConstants
     public const string WaveSawTool = "ti ti-wave-saw-tool";
     public const string WaveSine = "ti ti-wave-sine";
     public const string WaveSquare = "ti ti-wave-square";
+    public const string Waveform = "ti ti-waveform";
     public const string WavesElectricity = "ti ti-waves-electricity";
     public const string Webhook = "ti ti-webhook";
     public const string WebhookOff = "ti ti-webhook-off";
@@ -6224,6 +6241,7 @@ public static class TablerIconConstants
     public const string WorldLatitude = "ti ti-world-latitude";
     public const string WorldLongitude = "ti ti-world-longitude";
     public const string WorldMap = "ti ti-world-map";
+    public const string WorldMapOff = "ti ti-world-map-off";
     public const string WorldMinus = "ti ti-world-minus";
     public const string WorldOff = "ti ti-world-off";
     public const string WorldPause = "ti ti-world-pause";
@@ -6307,6 +6325,7 @@ public static class TablerIconConstants
     public const string ZoomReset = "ti ti-zoom-reset";
     public const string ZoomScan = "ti ti-zoom-scan";
     public const string ZoomScanFilled = "tif tif-zoom-scan";
+    public const string Zsh = "ti ti-zsh";
     public const string Zzz = "ti ti-zzz";
     public const string ZzzOff = "ti ti-zzz-off";
 }
