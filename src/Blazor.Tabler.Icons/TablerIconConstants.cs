@@ -49,9 +49,11 @@ public static class TablerIconConstants
     public const string AdjustmentsDown = "ti ti-adjustments-down";
     public const string AdjustmentsExclamation = "ti ti-adjustments-exclamation";
     public const string AdjustmentsFilled = "tif tif-adjustments";
+    public const string AdjustmentsFlame = "ti ti-adjustments-flame";
     public const string AdjustmentsHeart = "ti ti-adjustments-heart";
     public const string AdjustmentsHorizontal = "ti ti-adjustments-horizontal";
     public const string AdjustmentsHorizontalFilled = "tif tif-adjustments-horizontal";
+    public const string AdjustmentsKey = "ti ti-adjustments-key";
     public const string AdjustmentsMinus = "ti ti-adjustments-minus";
     public const string AdjustmentsOff = "ti ti-adjustments-off";
     public const string AdjustmentsPause = "ti ti-adjustments-pause";
@@ -331,12 +333,16 @@ public static class TablerIconConstants
     public const string ArrowMergeRight = "ti ti-arrow-merge-right";
     public const string ArrowMoveDown = "ti ti-arrow-move-down";
     public const string ArrowMoveDownFilled = "tif tif-arrow-move-down";
+    public const string ArrowMoveDownX = "ti ti-arrow-move-down-x";
     public const string ArrowMoveLeft = "ti ti-arrow-move-left";
     public const string ArrowMoveLeftFilled = "tif tif-arrow-move-left";
+    public const string ArrowMoveLeftX = "ti ti-arrow-move-left-x";
     public const string ArrowMoveRight = "ti ti-arrow-move-right";
     public const string ArrowMoveRightFilled = "tif tif-arrow-move-right";
+    public const string ArrowMoveRightX = "ti ti-arrow-move-right-x";
     public const string ArrowMoveUp = "ti ti-arrow-move-up";
     public const string ArrowMoveUpFilled = "tif tif-arrow-move-up";
+    public const string ArrowMoveUpX = "ti ti-arrow-move-up-x";
     public const string ArrowNarrowDown = "ti ti-arrow-narrow-down";
     public const string ArrowNarrowDownDashed = "ti ti-arrow-narrow-down-dashed";
     public const string ArrowNarrowLeft = "ti ti-arrow-narrow-left";
@@ -1387,7 +1393,9 @@ public static class TablerIconConstants
     public const string CameraDown = "ti ti-camera-down";
     public const string CameraExclamation = "ti ti-camera-exclamation";
     public const string CameraFilled = "tif tif-camera";
+    public const string CameraFlame = "ti ti-camera-flame";
     public const string CameraHeart = "ti ti-camera-heart";
+    public const string CameraKey = "ti ti-camera-key";
     public const string CameraMinus = "ti ti-camera-minus";
     public const string CameraMoon = "ti ti-camera-moon";
     public const string CameraOff = "ti ti-camera-off";
@@ -2739,7 +2747,9 @@ public static class TablerIconConstants
     public const string EyeEdit = "ti ti-eye-edit";
     public const string EyeExclamation = "ti ti-eye-exclamation";
     public const string EyeFilled = "tif tif-eye";
+    public const string EyeFlame = "ti ti-eye-flame";
     public const string EyeHeart = "ti ti-eye-heart";
+    public const string EyeKey = "ti ti-eye-key";
     public const string EyeMinus = "ti ti-eye-minus";
     public const string EyeOff = "ti ti-eye-off";
     public const string EyePause = "ti ti-eye-pause";
@@ -2929,6 +2939,8 @@ public static class TablerIconConstants
     public const string Filter2Down = "ti ti-filter-2-down";
     public const string Filter2Edit = "ti ti-filter-2-edit";
     public const string Filter2Exclamation = "ti ti-filter-2-exclamation";
+    public const string Filter2Flame = "ti ti-filter-2-flame";
+    public const string Filter2Key = "ti ti-filter-2-key";
     public const string Filter2Minus = "ti ti-filter-2-minus";
     public const string Filter2Pause = "ti ti-filter-2-pause";
     public const string Filter2Pin = "ti ti-filter-2-pin";
@@ -2950,7 +2962,9 @@ public static class TablerIconConstants
     public const string FilterEdit = "ti ti-filter-edit";
     public const string FilterExclamation = "ti ti-filter-exclamation";
     public const string FilterFilled = "tif tif-filter";
+    public const string FilterFlame = "ti ti-filter-flame";
     public const string FilterHeart = "ti ti-filter-heart";
+    public const string FilterKey = "ti ti-filter-key";
     public const string FilterMinus = "ti ti-filter-minus";
     public const string FilterOff = "ti ti-filter-off";
     public const string FilterPause = "ti ti-filter-pause";
@@ -3000,7 +3014,9 @@ public static class TablerIconConstants
     public const string FlagDown = "ti ti-flag-down";
     public const string FlagExclamation = "ti ti-flag-exclamation";
     public const string FlagFilled = "tif tif-flag";
+    public const string FlagFlame = "ti ti-flag-flame";
     public const string FlagHeart = "ti ti-flag-heart";
+    public const string FlagKey = "ti ti-flag-key";
     public const string FlagMinus = "ti ti-flag-minus";
     public const string FlagOff = "ti ti-flag-off";
     public const string FlagPause = "ti ti-flag-pause";
@@ -3271,7 +3287,9 @@ public static class TablerIconConstants
     public const string HeartDown = "ti ti-heart-down";
     public const string HeartExclamation = "ti ti-heart-exclamation";
     public const string HeartFilled = "tif tif-heart";
+    public const string HeartFlame = "ti ti-heart-flame";
     public const string HeartHandshake = "ti ti-heart-handshake";
+    public const string HeartKey = "ti ti-heart-key";
     public const string HeartMinus = "ti ti-heart-minus";
     public const string HeartOff = "ti ti-heart-off";
     public const string HeartPause = "ti ti-heart-pause";
@@ -3438,9 +3456,11 @@ public static class TablerIconConstants
     public const string HomeEdit = "ti ti-home-edit";
     public const string HomeExclamation = "ti ti-home-exclamation";
     public const string HomeFilled = "tif tif-home";
+    public const string HomeFlame = "ti ti-home-flame";
     public const string HomeHand = "ti ti-home-hand";
     public const string HomeHeart = "ti ti-home-heart";
     public const string HomeInfinity = "ti ti-home-infinity";
+    public const string HomeKey = "ti ti-home-key";
     public const string HomeLink = "ti ti-home-link";
     public const string HomeLock = "ti ti-home-lock";
     public const string HomeMinus = "ti ti-home-minus";
@@ -3924,8 +3944,10 @@ public static class TablerIconConstants
     public const string MailExclamation = "ti ti-mail-exclamation";
     public const string MailFast = "ti ti-mail-fast";
     public const string MailFilled = "tif tif-mail";
+    public const string MailFlame = "ti ti-mail-flame";
     public const string MailForward = "ti ti-mail-forward";
     public const string MailHeart = "ti ti-mail-heart";
+    public const string MailKey = "ti ti-mail-key";
     public const string MailMinus = "ti ti-mail-minus";
     public const string MailOff = "ti ti-mail-off";
     public const string MailOpened = "ti ti-mail-opened";
@@ -4674,8 +4696,10 @@ public static class TablerIconConstants
     public const string PhotoEdit = "ti ti-photo-edit";
     public const string PhotoExclamation = "ti ti-photo-exclamation";
     public const string PhotoFilled = "tif tif-photo";
+    public const string PhotoFlame = "ti ti-photo-flame";
     public const string PhotoHeart = "ti ti-photo-heart";
     public const string PhotoHexagon = "ti ti-photo-hexagon";
+    public const string PhotoKey = "ti ti-photo-key";
     public const string PhotoMinus = "ti ti-photo-minus";
     public const string PhotoOff = "ti ti-photo-off";
     public const string PhotoPause = "ti ti-photo-pause";
@@ -5195,7 +5219,9 @@ public static class TablerIconConstants
     public const string SettingsDown = "ti ti-settings-down";
     public const string SettingsExclamation = "ti ti-settings-exclamation";
     public const string SettingsFilled = "tif tif-settings";
+    public const string SettingsFlame = "ti ti-settings-flame";
     public const string SettingsHeart = "ti ti-settings-heart";
+    public const string SettingsKey = "ti ti-settings-key";
     public const string SettingsMinus = "ti ti-settings-minus";
     public const string SettingsOff = "ti ti-settings-off";
     public const string SettingsPause = "ti ti-settings-pause";
@@ -5314,7 +5340,9 @@ public static class TablerIconConstants
     public const string SignatureOff = "ti ti-signature-off";
     public const string Sitemap = "ti ti-sitemap";
     public const string SitemapFilled = "tif tif-sitemap";
+    public const string SitemapMinus = "ti ti-sitemap-minus";
     public const string SitemapOff = "ti ti-sitemap-off";
+    public const string SitemapPlus = "ti ti-sitemap-plus";
     public const string Skateboard = "ti ti-skateboard";
     public const string SkateboardOff = "ti ti-skateboard-off";
     public const string Skateboarding = "ti ti-skateboarding";
@@ -6063,6 +6091,7 @@ public static class TablerIconConstants
     public const string UserEdit = "ti ti-user-edit";
     public const string UserExclamation = "ti ti-user-exclamation";
     public const string UserFilled = "tif tif-user";
+    public const string UserFlame = "ti ti-user-flame";
     public const string UserHeart = "ti ti-user-heart";
     public const string UserHexagon = "ti ti-user-hexagon";
     public const string UserKey = "ti ti-user-key";
@@ -6078,6 +6107,7 @@ public static class TablerIconConstants
     public const string UserSearch = "ti ti-user-search";
     public const string UserShare = "ti ti-user-share";
     public const string UserShield = "ti ti-user-shield";
+    public const string UserSpark = "ti ti-user-spark";
     public const string UserSquare = "ti ti-user-square";
     public const string UserSquareRounded = "ti ti-user-square-rounded";
     public const string UserStar = "ti ti-user-star";
