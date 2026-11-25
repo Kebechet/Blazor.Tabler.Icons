@@ -633,6 +633,7 @@ public static class TablerIconConstants
     public const string BedFlat = "ti ti-bed-flat";
     public const string BedFlatFilled = "tif tif-bed-flat";
     public const string BedOff = "ti ti-bed-off";
+    public const string BedPin = "ti ti-bed-pin";
     public const string Beer = "ti ti-beer";
     public const string BeerFilled = "tif tif-beer";
     public const string BeerOff = "ti ti-beer-off";
@@ -676,6 +677,7 @@ public static class TablerIconConstants
     public const string Bike = "ti ti-bike";
     public const string BikeFilled = "tif tif-bike";
     public const string BikeOff = "ti ti-bike-off";
+    public const string BikePin = "ti ti-bike-pin";
     public const string Binary = "ti ti-binary";
     public const string BinaryOff = "ti ti-binary-off";
     public const string BinaryTree = "ti ti-binary-tree";
@@ -1273,6 +1275,7 @@ public static class TablerIconConstants
     public const string Briefcase2Filled = "tif tif-briefcase-2";
     public const string BriefcaseFilled = "tif tif-briefcase";
     public const string BriefcaseOff = "ti ti-briefcase-off";
+    public const string BriefcasePin = "ti ti-briefcase-pin";
     public const string Brightness = "ti ti-brightness";
     public const string Brightness2 = "ti ti-brightness-2";
     public const string BrightnessAuto = "ti ti-brightness-auto";
@@ -1342,6 +1345,7 @@ public static class TablerIconConstants
     public const string BuildingFortress = "ti ti-building-fortress";
     public const string BuildingHeart = "ti ti-building-heart";
     public const string BuildingHospital = "ti ti-building-hospital";
+    public const string BuildingHospitalPin = "ti ti-building-hospital-pin";
     public const string BuildingLighthouse = "ti ti-building-lighthouse";
     public const string BuildingMinus = "ti ti-building-minus";
     public const string BuildingMonument = "ti ti-building-monument";
@@ -1358,6 +1362,7 @@ public static class TablerIconConstants
     public const string BuildingStadium = "ti ti-building-stadium";
     public const string BuildingStar = "ti ti-building-star";
     public const string BuildingStore = "ti ti-building-store";
+    public const string BuildingStorePin = "ti ti-building-store-pin";
     public const string BuildingTunnel = "ti ti-building-tunnel";
     public const string BuildingUp = "ti ti-building-up";
     public const string BuildingWarehouse = "ti ti-building-warehouse";
@@ -1372,6 +1377,7 @@ public static class TablerIconConstants
     public const string Bus = "ti ti-bus";
     public const string BusFilled = "tif tif-bus";
     public const string BusOff = "ti ti-bus-off";
+    public const string BusPin = "ti ti-bus-pin";
     public const string BusStop = "ti ti-bus-stop";
     public const string Businessplan = "ti ti-businessplan";
     public const string Butterfly = "ti ti-butterfly";
@@ -1495,6 +1501,7 @@ public static class TablerIconConstants
     public const string CarLifter = "ti ti-car-lifter";
     public const string CarOff = "ti ti-car-off";
     public const string CarOffRoad = "ti ti-car-off-road";
+    public const string CarPin = "ti ti-car-pin";
     public const string CarSuspension = "ti ti-car-suspension";
     public const string CarSuv = "ti ti-car-suv";
     public const string CarSuvFilled = "tif tif-car-suv";
@@ -2111,6 +2118,7 @@ public static class TablerIconConstants
     public const string Codeblock = "ti ti-codeblock";
     public const string Coffee = "ti ti-coffee";
     public const string CoffeeOff = "ti ti-coffee-off";
+    public const string CoffeePin = "ti ti-coffee-pin";
     public const string Coffin = "ti ti-coffin";
     public const string Coin = "ti ti-coin";
     public const string CoinBitcoin = "ti ti-coin-bitcoin";
@@ -3266,6 +3274,7 @@ public static class TablerIconConstants
     public const string GasStation = "ti ti-gas-station";
     public const string GasStationFilled = "tif tif-gas-station";
     public const string GasStationOff = "ti ti-gas-station-off";
+    public const string GasStationPin = "ti ti-gas-station-pin";
     public const string Gauge = "ti ti-gauge";
     public const string GaugeFilled = "tif tif-gauge";
     public const string GaugeOff = "ti ti-gauge-off";
@@ -3606,6 +3615,7 @@ public static class TablerIconConstants
     public const string HomeMinus = "ti ti-home-minus";
     public const string HomeMove = "ti ti-home-move";
     public const string HomeOff = "ti ti-home-off";
+    public const string HomePin = "ti ti-home-pin";
     public const string HomePlus = "ti ti-home-plus";
     public const string HomeQuestion = "ti ti-home-question";
     public const string HomeRibbon = "ti ti-home-ribbon";
@@ -4737,6 +4747,7 @@ public static class TablerIconConstants
     public const string PackageExport = "ti ti-package-export";
     public const string PackageImport = "ti ti-package-import";
     public const string PackageOff = "ti ti-package-off";
+    public const string PackagePin = "ti ti-package-pin";
     public const string Packages = "ti ti-packages";
     public const string Pacman = "ti ti-pacman";
     public const string PacmanFilled = "tif tif-pacman";
@@ -4765,6 +4776,7 @@ public static class TablerIconConstants
     public const string ParkingCircleFilled = "tif tif-parking-circle";
     public const string ParkingMeter = "ti ti-parking-meter";
     public const string ParkingOff = "ti ti-parking-off";
+    public const string ParkingPin = "ti ti-parking-pin";
     public const string Password = "ti ti-password";
     public const string PasswordFingerprint = "ti ti-password-fingerprint";
     public const string PasswordMobilePhone = "ti ti-password-mobile-phone";
@@ -4861,6 +4873,7 @@ public static class TablerIconConstants
     public const string PhoneOff = "ti ti-phone-off";
     public const string PhoneOutgoing = "ti ti-phone-outgoing";
     public const string PhonePause = "ti ti-phone-pause";
+    public const string PhonePin = "ti ti-phone-pin";
     public const string PhonePlus = "ti ti-phone-plus";
     public const string PhoneRinging = "ti ti-phone-ringing";
     public const string PhoneSpark = "ti ti-phone-spark";
@@ -4951,6 +4964,7 @@ public static class TablerIconConstants
     public const string PlaneFilled = "tif tif-plane";
     public const string PlaneInflight = "ti ti-plane-inflight";
     public const string PlaneOff = "ti ti-plane-off";
+    public const string PlanePin = "ti ti-plane-pin";
     public const string PlaneTilt = "ti ti-plane-tilt";
     public const string PlaneTiltFilled = "tif tif-plane-tilt";
     public const string Planet = "ti ti-planet";
@@ -5343,6 +5357,7 @@ public static class TablerIconConstants
     public const string SchoolBell = "ti ti-school-bell";
     public const string SchoolFilled = "tif tif-school";
     public const string SchoolOff = "ti ti-school-off";
+    public const string SchoolPin = "ti ti-school-pin";
     public const string Scissors = "ti ti-scissors";
     public const string ScissorsOff = "ti ti-scissors-off";
     public const string Scooter = "ti ti-scooter";
@@ -6105,6 +6120,7 @@ public static class TablerIconConstants
     public const string TemplateOff = "ti ti-template-off";
     public const string Tent = "ti ti-tent";
     public const string TentOff = "ti ti-tent-off";
+    public const string TentPin = "ti ti-tent-pin";
     public const string Terminal = "ti ti-terminal";
     public const string Terminal2 = "ti ti-terminal-2";
     public const string TestPipe = "ti ti-test-pipe";
@@ -6192,6 +6208,7 @@ public static class TablerIconConstants
     public const string ToolsKitchen2 = "ti ti-tools-kitchen-2";
     public const string ToolsKitchen2Filled = "tif tif-tools-kitchen-2";
     public const string ToolsKitchen2Off = "ti ti-tools-kitchen-2-off";
+    public const string ToolsKitchen2Pin = "ti ti-tools-kitchen-2-pin";
     public const string ToolsKitchen3 = "ti ti-tools-kitchen-3";
     public const string ToolsKitchenOff = "ti ti-tools-kitchen-off";
     public const string ToolsOff = "ti ti-tools-off";
@@ -6288,6 +6305,7 @@ public static class TablerIconConstants
     public const string Trowel = "ti ti-trowel";
     public const string Truck = "ti ti-truck";
     public const string TruckDelivery = "ti ti-truck-delivery";
+    public const string TruckDeliveryPin = "ti ti-truck-delivery-pin";
     public const string TruckFilled = "tif tif-truck";
     public const string TruckLoading = "ti ti-truck-loading";
     public const string TruckOff = "ti ti-truck-off";
