@@ -115,6 +115,21 @@ public class RegistryTests
     }
 
     [Fact]
+    public void RegisterRange_WhenTheBatchThrowsMidway_StillAnnouncesTheIconsItStored()
+    {
+        // Arrange
+        var registrations = GetBrandRegistrations(skip: 85, take: 2, inner: "<path d=\"M7 7\" />");
+
+        // Act
+        var notificationCount = CountNotificationsDuring(() => Assert.Throws<InvalidOperationException>(
+            () => TablerSvgRegistry.RegisterRange(YieldThenThrow(registrations))));
+
+        // Assert - a sprite on screen would otherwise never learn of icons that are already in the registry
+        Assert.Equal(1, notificationCount);
+        Assert.All(registrations, x => Assert.True(TablerSvgRegistry.TryGet(x.Type, out _)));
+    }
+
+    [Fact]
     public void Register_NotifiesOnce_AndOnlyWhenTheEntryChanges()
     {
         // Arrange
@@ -328,6 +343,16 @@ public class RegistryTests
             .Take(take)
             .Select(x => new TablerSvgRegistration(x, IsFilled: false, Inner: inner))
             .ToArray();
+    }
+
+    private static IEnumerable<TablerSvgRegistration> YieldThenThrow(IEnumerable<TablerSvgRegistration> registrations)
+    {
+        foreach (var registration in registrations)
+        {
+            yield return registration;
+        }
+
+        throw new InvalidOperationException("The source of the batch failed.");
     }
 
     private static int CountNotificationsDuring(Action registration)

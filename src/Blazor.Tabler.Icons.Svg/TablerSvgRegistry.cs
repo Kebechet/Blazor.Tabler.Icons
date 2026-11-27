@@ -50,14 +50,21 @@ public static class TablerSvgRegistry
     public static void RegisterRange(IEnumerable<TablerSvgRegistration> registrations)
     {
         var isChanged = false;
-        foreach (var registration in registrations)
+        try
         {
-            isChanged |= Store(registration.Type, new TablerSvgEntry(registration.IsFilled, registration.Inner));
+            foreach (var registration in registrations)
+            {
+                isChanged |= Store(registration.Type, new TablerSvgEntry(registration.IsFilled, registration.Inner));
+            }
         }
-
-        if (isChanged)
+        finally
         {
-            IconRegistered?.Invoke();
+            // Also when the sequence throws midway: the icons stored so far are in the registry, and a
+            // retry would find them unchanged and announce nothing.
+            if (isChanged)
+            {
+                IconRegistered?.Invoke();
+            }
         }
     }
 
