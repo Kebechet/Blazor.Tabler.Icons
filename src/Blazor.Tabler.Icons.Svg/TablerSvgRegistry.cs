@@ -51,7 +51,10 @@ public static class TablerSvgRegistry
     /// <summary>Every registered icon, ordered by type so a sprite renders its symbols in a stable order.</summary>
     internal static KeyValuePair<TablerIconType, TablerSvgEntry>[] GetEntries()
     {
+        // The dictionary's own ToArray is a locked snapshot. LINQ would read Count and then CopyTo,
+        // which throws when another thread registers an icon in between.
         return _entries
+            .ToArray()
             .OrderBy(x => x.Key)
             .ToArray();
     }

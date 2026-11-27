@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.Loader;
 using Blazor.Tabler.Icons;
 using Blazor.Tabler.Icons.Svg;
@@ -155,6 +156,46 @@ public class RegistryTests
         }
     }
 
+    [Fact]
+    public void GetEntries_WhileOtherThreadsRegister_ReturnsASnapshot()
+    {
+        for (var round = 0; round < RoundCount; round++)
+        {
+            // Arrange
+            var registry = new IsolatedRegistry();
+            Register(registry, _iconNumbers[0]);
+
+            using var writerDone = new ManualResetEventSlim();
+
+            // Act - the sprite sheet reads every entry while a module initializer is still registering
+            RunConcurrently(2, worker =>
+            {
+                if (worker == 0)
+                {
+                    try
+                    {
+                        foreach (var iconNumber in _iconNumbers)
+                        {
+                            Register(registry, iconNumber);
+                        }
+                    }
+                    finally
+                    {
+                        writerDone.Set();
+                    }
+
+                    return;
+                }
+
+                do
+                {
+                    registry.GetEntries();
+                }
+                while (!writerDone.IsSet);
+            });
+        }
+    }
+
     private static void Register(IsolatedRegistry registry, int iconNumber)
     {
         var expected = GetExpectedEntry(iconNumber);
@@ -237,6 +278,7 @@ public class RegistryTests
     {
         private readonly Action<int, bool, string> _register;
         private readonly Func<int, TablerSvgEntry?> _tryGet;
+        private readonly Func<Array> _getEntries;
 
         public IsolatedRegistry()
         {
@@ -246,6 +288,10 @@ public class RegistryTests
             var registryType = assembly.GetType(typeof(TablerSvgRegistry).FullName!)!;
             var iconType = assembly.GetType(typeof(TablerIconType).FullName!)!;
             var entryType = assembly.GetType(typeof(TablerSvgEntry).FullName!)!;
+
+            _getEntries = registryType
+                .GetMethod(nameof(TablerSvgRegistry.GetEntries), BindingFlags.NonPublic | BindingFlags.Static)!
+                .CreateDelegate<Func<Array>>();
 
             var iconNumber = Expression.Parameter(typeof(int));
             var icon = Expression.Convert(iconNumber, iconType);
@@ -273,6 +319,11 @@ public class RegistryTests
         public void Register(int iconNumber, bool isFilled, string inner)
         {
             _register(iconNumber, isFilled, inner);
+        }
+
+        public Array GetEntries()
+        {
+            return _getEntries();
         }
 
         public TablerSvgEntry? TryGet(int iconNumber)
