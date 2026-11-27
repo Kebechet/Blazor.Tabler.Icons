@@ -9,6 +9,15 @@ namespace Blazor.Tabler.Icons.Svg;
 /// <see cref="TablerIconSprite"/>. A separate component with no parameters, so the symbols are not
 /// diffed again every time the host re-renders with new child content.
 /// </summary>
+/// <remarks>
+/// Streaming server rendering sends later updates only for components that opted in. A page that
+/// streams and first uses a class library's icons after an await registers them after the first chunk
+/// has gone out, so without this the page's icons arrive as <c>&lt;use&gt;</c> references to symbols
+/// that are never sent. The attribute does not exist before .NET 8, which has no streaming rendering.
+/// </remarks>
+#if NET8_0_OR_GREATER
+[StreamRendering(true)]
+#endif
 internal sealed class TablerSpriteSheet : ComponentBase, IDisposable
 {
     private const string SymbolIdPrefix = "tabler-icon-";
