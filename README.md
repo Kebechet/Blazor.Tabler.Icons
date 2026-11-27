@@ -24,7 +24,7 @@ Both expose the same `TablerIconType` enum and the same `<TablerIcon Type="..." 
 | [`Kebechet.Blazor.Tabler.Icons.Svg`](https://www.nuget.org/packages/Kebechet.Blazor.Tabler.Icons.Svg/) | Inline **SVG** (`<svg>`) | A source generator inlines **only the icons you reference** | [svg README](src/Blazor.Tabler.Icons.Svg/README.md) |
 
 - Pick **font** for the simplest drop-in: one cached file, no generator, maximum compatibility.
-- Pick **SVG** when bundle size matters or you want crisp, box-aligned icons that color via `currentColor`.
+- Pick **SVG** when bundle size matters or you want crisp, box-aligned icons that color via `currentColor`. Its opt-in [sprite mode](src/Blazor.Tabler.Icons.Svg/README.md#sprite-mode-opt-in) sends each icon's paths once instead of per icon, which matters in Blazor Hybrid and Server, where every render batch crosses a bridge or a socket.
 
 ```bash
 dotnet add package Kebechet.Blazor.Tabler.Icons        # font
@@ -41,9 +41,9 @@ dotnet add package Kebechet.Blazor.Tabler.Icons.Svg    # svg (tree-shaking)
 |---------|---------|
 | `src/Core` | Shared project holding the generated `TablerIconType` enum (the single source of truth). Linked into both packages - no separate NuGet. |
 | `src/Blazor.Tabler.Icons` | Font package: CSS-class constants, `<TablerIcon>`, woff2 + CSS. |
-| `src/Blazor.Tabler.Icons.Svg` | SVG package: `<TablerIcon>` (inline svg), registry, `[IncludeTablerIcons]`. |
+| `src/Blazor.Tabler.Icons.Svg` | SVG package: `<TablerIcon>` (inline svg or sprite reference), `<TablerIconSprite>`, registry, `[IncludeTablerIcons]`. |
 | `src/Blazor.Tabler.Icons.Svg.Generator` | Roslyn source generator + embedded SVG dataset (build-time only, never shipped). |
-| `tests/` | xUnit tests for both backends (font mapping; svg generation, tree-shaking, diagnostics). |
+| `tests/` | xUnit tests for both backends (font mapping; svg generation, tree-shaking, diagnostics; svg component markup). |
 
 ## Updating icons
 

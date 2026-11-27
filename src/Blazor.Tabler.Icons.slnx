@@ -6,5 +6,6 @@
   <Folder Name="/tests/">
     <Project Path="../tests/Blazor.Tabler.Icons.Tests/Blazor.Tabler.Icons.Tests.csproj" />
     <Project Path="../tests/Blazor.Tabler.Icons.Svg.Tests/Blazor.Tabler.Icons.Svg.Tests.csproj" />
+    <Project Path="../tests/Blazor.Tabler.Icons.Svg.Streaming.Tests/Blazor.Tabler.Icons.Svg.Streaming.Tests.csproj" />
   </Folder>
 </Solution>
