@@ -19,8 +19,8 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>3.53.0</Version>
-    <PackageReleaseNotes>SVG backend for Tabler Icons v3.53.0</PackageReleaseNotes>
+    <Version>3.53.0.1</Version>
+    <PackageReleaseNotes>Fix: TablerSvgRegistry is now thread-safe, so module initializers of several assemblies registering icons at the same time no longer corrupt it or throw.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
