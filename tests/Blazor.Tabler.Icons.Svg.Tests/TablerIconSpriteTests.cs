@@ -84,8 +84,8 @@ public class TablerIconSpriteTests : BunitContext
             .Select(x => $"tabler-icon-{x.Key}")
             .ToList();
         Assert.Equal(expectedSymbolIds.OrderBy(x => x, StringComparer.Ordinal), symbolIds.OrderBy(x => x, StringComparer.Ordinal));
-        Assert.Contains($"<symbol id=\"tabler-icon-Home\" viewBox=\"0 0 24 24\">{TestIcons.HomeInner}</symbol>", cut.Markup);
-        Assert.Contains($"<symbol id=\"tabler-icon-HomeFilled\" viewBox=\"0 0 24 24\">{TestIcons.HomeFilledInner}</symbol>", cut.Markup);
+        Assert.Contains($"<symbol id=\"tabler-icon-Home\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\">{TestIcons.HomeInner}</symbol>", cut.Markup);
+        Assert.Contains($"<symbol id=\"tabler-icon-HomeFilled\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\">{TestIcons.HomeFilledInner}</symbol>", cut.Markup);
     }
 
     [Fact]
@@ -223,7 +223,7 @@ public class TablerIconSpriteTests : BunitContext
         });
 
         // Assert
-        Assert.Contains($"<symbol id=\"tabler-icon-Home\" viewBox=\"0 0 24 24\">{TestIcons.HomeInner}</symbol>", html);
+        Assert.Contains($"<symbol id=\"tabler-icon-Home\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\">{TestIcons.HomeInner}</symbol>", html);
         Assert.Contains($"{OutlineSvgOpenTag}{HomeUse}</svg>", html);
     }
 

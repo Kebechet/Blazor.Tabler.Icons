@@ -43,7 +43,12 @@ internal sealed class TablerSpriteSheet : ComponentBase, IDisposable
             builder.SetKey(type);
             builder.AddAttribute(7, "id", GetSymbolId(type));
             builder.AddAttribute(8, "viewBox", "0 0 24 24");
-            builder.AddMarkupContent(9, entry.Inner);
+            // Sized in the paths' own coordinates: without it a <use> stretches the symbol to whatever
+            // viewBox a caller sets on the icon's <svg>, which inline paths do not. On the symbol rather
+            // than on each <use>, which would add the two attributes to every icon in every render batch.
+            builder.AddAttribute(9, "width", "24");
+            builder.AddAttribute(10, "height", "24");
+            builder.AddMarkupContent(11, entry.Inner);
             builder.CloseElement();
         }
 
