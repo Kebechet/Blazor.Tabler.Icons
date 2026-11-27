@@ -1,15 +1,21 @@
+using System.Collections.Concurrent;
 using Blazor.Tabler.Icons;
 
 namespace Blazor.Tabler.Icons.Svg;
 
 /// <summary>
 /// Holds the SVG body for the icons a consumer actually uses. Populated by a module
-/// initializer that the source generator emits into the consuming assembly, so only
+/// initializer that the source generator emits into every consuming assembly, so only
 /// referenced icons are ever present at runtime.
 /// </summary>
+/// <remarks>
+/// Safe for concurrent registration and lookup. The module initializers of several assemblies
+/// can run at the same time on different threads (for example a test host that loads assemblies
+/// from parallel test threads), and a lookup can happen while a registration is still running.
+/// </remarks>
 public static class TablerSvgRegistry
 {
-    private static readonly Dictionary<TablerIconType, TablerSvgEntry> _entries = new();
+    private static readonly ConcurrentDictionary<TablerIconType, TablerSvgEntry> _entries = new();
 
     /// <summary>Registers the inner SVG markup for an icon. Called by generated code.</summary>
     public static void Register(TablerIconType type, bool isFilled, string inner)
