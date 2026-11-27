@@ -35,6 +35,50 @@ public class SvgGeneratorTests
     }
 
     [Fact]
+    public void Generates_EveryIcon_InOneRegisterRangeCall()
+    {
+        // Arrange
+        const string source = """
+            using Blazor.Tabler.Icons;
+            public static class Usage
+            {
+                public static readonly TablerIconType A = TablerIconType.Plus;
+                public static readonly TablerIconType B = TablerIconType.X;
+                public static readonly TablerIconType C = TablerIconType.Home;
+            }
+            """;
+
+        // Act
+        var (generated, _) = RunGenerator(source);
+
+        // Assert - one call, so one notification: a sprite on screen re-renders once per assembly, not per icon
+        Assert.Equal(1, CountOccurrences(generated, ".RegisterRange("));
+        Assert.Equal(0, CountOccurrences(generated, ".Register("));
+        Assert.Equal(3, CountRegistrations(generated));
+    }
+
+    [Fact]
+    public void GeneratedCode_CompilesAgainstThePackage()
+    {
+        // Arrange
+        const string source = """
+            using Blazor.Tabler.Icons;
+            public static class Usage
+            {
+                public static readonly TablerIconType A = TablerIconType.Plus;
+                public static readonly TablerIconType B = TablerIconType.HomeFilled;
+            }
+            """;
+        var (generated, _) = RunGenerator(source);
+
+        // Act
+        var errors = GetCompilationErrors(source, generated);
+
+        // Assert
+        Assert.Empty(errors);
+    }
+
+    [Fact]
     public void Generates_IconsReferenced_InRazorMarkup()
     {
         // Arrange
@@ -286,15 +330,35 @@ public class SvgGeneratorTests
 
     private static int CountRegistrations(string generated)
     {
+        return CountOccurrences(generated, "new global::Blazor.Tabler.Icons.Svg.TablerSvgRegistration(");
+    }
+
+    private static int CountOccurrences(string text, string value)
+    {
         var count = 0;
         var index = 0;
-        while ((index = generated.IndexOf(".Register(", index, StringComparison.Ordinal)) >= 0)
+        while ((index = text.IndexOf(value, index, StringComparison.Ordinal)) >= 0)
         {
             count++;
-            index += ".Register(".Length;
+            index += value.Length;
         }
 
         return count;
+    }
+
+    private static List<Diagnostic> GetCompilationErrors(string source, string generated)
+    {
+        // The oldest language version the generated code may need: a consumer can pin it below the SDK's.
+        var parseOptions = new CSharpParseOptions(LanguageVersion.CSharp9);
+        var compilation = CSharpCompilation.Create(
+            "Tests.GeneratedCompiles",
+            new[] { CSharpSyntaxTree.ParseText(source, parseOptions), CSharpSyntaxTree.ParseText(generated, parseOptions) },
+            BuildReferences(),
+            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+
+        return compilation.GetDiagnostics()
+            .Where(x => x.Severity == DiagnosticSeverity.Error)
+            .ToList();
     }
 
     private static MetadataReference[] BuildReferences()

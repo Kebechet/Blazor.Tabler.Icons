@@ -50,6 +50,88 @@ public class RegistryTests
     }
 
     [Fact]
+    public void RegisterRange_ThenTryGet_ReturnsEveryStoredEntry()
+    {
+        // Arrange
+        var registrations = GetBrandRegistrations(skip: 50, take: 3, inner: "<path d=\"M2 2\" />");
+
+        // Act
+        TablerSvgRegistry.RegisterRange(registrations);
+
+        // Assert
+        foreach (var registration in registrations)
+        {
+            Assert.True(TablerSvgRegistry.TryGet(registration.Type, out var entry));
+            Assert.Equal(new TablerSvgEntry(registration.IsFilled, registration.Inner), entry);
+        }
+    }
+
+    [Fact]
+    public void RegisterRange_SameIconTwiceInOneBatch_KeepsLastWrite()
+    {
+        // Arrange
+        var brandIcon = GetBrandRegistrations(skip: 54, take: 1, inner: string.Empty).Single().Type;
+        TablerSvgRegistration[] registrations =
+        [
+            new(brandIcon, IsFilled: false, Inner: "<path d=\"first\" />"),
+            new(brandIcon, IsFilled: true, Inner: "<path d=\"second\" />"),
+        ];
+
+        // Act
+        TablerSvgRegistry.RegisterRange(registrations);
+
+        // Assert
+        Assert.True(TablerSvgRegistry.TryGet(brandIcon, out var entry));
+        Assert.Equal(new TablerSvgEntry(IsFilled: true, Inner: "<path d=\"second\" />"), entry);
+    }
+
+    [Fact]
+    public void RegisterRange_NotifiesOnce_ForTheWholeBatch()
+    {
+        // Arrange
+        var registrations = GetBrandRegistrations(skip: 55, take: 20, inner: "<path d=\"M3 3\" />");
+
+        // Act
+        var notificationCount = CountNotificationsDuring(() => TablerSvgRegistry.RegisterRange(registrations));
+
+        // Assert
+        Assert.Equal(1, notificationCount);
+    }
+
+    [Fact]
+    public void RegisterRange_NotifiesNothing_WhenNothingChanges()
+    {
+        // Arrange
+        var registrations = GetBrandRegistrations(skip: 75, take: 5, inner: "<path d=\"M4 4\" />");
+        TablerSvgRegistry.RegisterRange(registrations);
+
+        // Act
+        var unchangedNotificationCount = CountNotificationsDuring(() => TablerSvgRegistry.RegisterRange(registrations));
+        var emptyNotificationCount = CountNotificationsDuring(() => TablerSvgRegistry.RegisterRange([]));
+
+        // Assert
+        Assert.Equal(0, unchangedNotificationCount);
+        Assert.Equal(0, emptyNotificationCount);
+    }
+
+    [Fact]
+    public void Register_NotifiesOnce_AndOnlyWhenTheEntryChanges()
+    {
+        // Arrange
+        var brandIcon = GetBrandRegistrations(skip: 80, take: 1, inner: string.Empty).Single().Type;
+
+        // Act
+        var firstNotificationCount = CountNotificationsDuring(() => TablerSvgRegistry.Register(brandIcon, isFilled: false, inner: "<path d=\"M5 5\" />"));
+        var repeatedNotificationCount = CountNotificationsDuring(() => TablerSvgRegistry.Register(brandIcon, isFilled: false, inner: "<path d=\"M5 5\" />"));
+        var changedNotificationCount = CountNotificationsDuring(() => TablerSvgRegistry.Register(brandIcon, isFilled: false, inner: "<path d=\"M6 6\" />"));
+
+        // Assert
+        Assert.Equal(1, firstNotificationCount);
+        Assert.Equal(0, repeatedNotificationCount);
+        Assert.Equal(1, changedNotificationCount);
+    }
+
+    [Fact]
     public void Register_SameIconTwice_KeepsLastWrite()
     {
         // Arrange
@@ -231,6 +313,38 @@ public class RegistryTests
         Assert.Equal(_iconNumbers.Take(3), snapshot.Select(x => x.IconNumber));
         Assert.All(snapshot, x => Assert.Equal(GetExpectedEntry(x.IconNumber), x.Entry));
         Assert.Equal(_iconNumbers.Take(4), registry.GetEntries().Select(x => x.IconNumber));
+    }
+
+    /// <summary>
+    /// Brand icons no other test reads as unregistered. The slices the tests take are disjoint, and
+    /// disjoint from the ones <see cref="TablerIconSpriteTests"/> takes, so registering them
+    /// process-wide disturbs nothing.
+    /// </summary>
+    private static TablerSvgRegistration[] GetBrandRegistrations(int skip, int take, string inner)
+    {
+        return Enum.GetValues<TablerIconType>()
+            .Where(x => x.ToString().StartsWith("Brand", StringComparison.Ordinal))
+            .Skip(skip)
+            .Take(take)
+            .Select(x => new TablerSvgRegistration(x, IsFilled: false, Inner: inner))
+            .ToArray();
+    }
+
+    private static int CountNotificationsDuring(Action registration)
+    {
+        var notificationCount = 0;
+        Action onIconRegistered = () => notificationCount++;
+        TablerSvgRegistry.IconRegistered += onIconRegistered;
+        try
+        {
+            registration();
+        }
+        finally
+        {
+            TablerSvgRegistry.IconRegistered -= onIconRegistered;
+        }
+
+        return notificationCount;
     }
 
     private static void Register(IsolatedRegistry registry, int iconNumber)

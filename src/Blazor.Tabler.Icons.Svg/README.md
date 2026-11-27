@@ -98,7 +98,7 @@ The nearest setting wins: an icon's own `SvgMode`, then the closest cascaded `Ta
 - **Once per page, in the tree that renders the icons.** A cascading value does not cross a component that has its own `@rendermode`, so in a Blazor Web App with per-page or per-component interactivity, icons inside an interactive component render inline unless that component's content is wrapped in its own `<TablerIconSprite>`. Two sprites on one page are harmless: their symbols carry the same markup.
 - **Without child content**, `<TablerIconSprite />` renders only the sprite, for icons opted in through `SvgMode="TablerSvgMode.Sprite"` or a cascade of your own, e.g. .NET 8+'s root-level `builder.Services.AddCascadingValue(_ => TablerSvgMode.Sprite);`.
 - **Prerendering** (static SSR, interactive server, prerendered WebAssembly) works: the sprite and the references are plain HTML.
-- **Class libraries** register their icons when the runtime first uses them, which can be after the sprite rendered; the sprite re-renders to add them.
+- **Class libraries** register their icons when the runtime first uses them, which can be after the sprite rendered; the sprite re-renders once to add all of an assembly's icons.
 
 > Sprite mode with no `<TablerIconSprite>` in the document renders the icon blank, with no error. It can only happen when you opt in yourself (`SvgMode="TablerSvgMode.Sprite"` or your own cascade) - icons inside `<TablerIconSprite>` always have it. If an icon is blank, check that the page contains `<symbol id="tabler-icon-{Name}">`.
 

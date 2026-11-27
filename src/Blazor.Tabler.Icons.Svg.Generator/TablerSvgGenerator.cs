@@ -182,6 +182,8 @@ public sealed class TablerSvgGenerator : IIncrementalGenerator
         builder.AppendLine("        [global::System.Runtime.CompilerServices.ModuleInitializer]");
         builder.AppendLine("        internal static void Initialize()");
         builder.AppendLine("        {");
+        builder.AppendLine("            global::Blazor.Tabler.Icons.Svg.TablerSvgRegistry.RegisterRange(new global::Blazor.Tabler.Icons.Svg.TablerSvgRegistration[]");
+        builder.AppendLine("            {");
 
         foreach (var name in used.OrderBy(static x => x, StringComparer.Ordinal))
         {
@@ -194,9 +196,10 @@ public sealed class TablerSvgGenerator : IIncrementalGenerator
             var literal = SymbolDisplay.FormatLiteral(entry.Inner, quote: true);
             var isFilled = entry.IsFilled ? "true" : "false";
             builder.AppendLine(
-                $"            global::Blazor.Tabler.Icons.Svg.TablerSvgRegistry.Register(global::Blazor.Tabler.Icons.TablerIconType.{name}, {isFilled}, {literal});");
+                $"                new global::Blazor.Tabler.Icons.Svg.TablerSvgRegistration(global::Blazor.Tabler.Icons.TablerIconType.{name}, {isFilled}, {literal}),");
         }
 
+        builder.AppendLine("            });");
         builder.AppendLine("        }");
         builder.AppendLine("    }");
         builder.AppendLine("}");

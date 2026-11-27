@@ -18,6 +18,24 @@ public class TablerIconSpriteTests : BunitContext
 
     private const string BellInner = "<path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\" /> <path d=\"M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6\" /> <path d=\"M9 17v1a3 3 0 0 0 6 0v-1\" />";
 
+    /// <summary>
+    /// Icons no other test reads as unregistered, so registering them process-wide disturbs nothing.
+    /// </summary>
+    private static readonly TablerIconType[] _brandIcons = Enum.GetValues<TablerIconType>()
+        .Where(x => x.ToString().StartsWith("Brand", StringComparison.Ordinal))
+        .ToArray();
+
+    private static readonly TablerSvgRegistration[] _lateBatchRegistrations = _brandIcons
+        .Take(40)
+        .Select(x => new TablerSvgRegistration(x, IsFilled: false, Inner: BellInner))
+        .ToArray();
+
+    private static readonly TablerSvgRegistration[] _unchangedBatchRegistrations = _brandIcons
+        .Skip(40)
+        .Take(5)
+        .Select(x => new TablerSvgRegistration(x, IsFilled: false, Inner: BellInner))
+        .ToArray();
+
     public TablerIconSpriteTests()
     {
         TestIcons.Register();
@@ -181,6 +199,41 @@ public class TablerIconSpriteTests : BunitContext
 
         // Assert
         cut.WaitForAssertion(() => Assert.Single(cut.FindAll("symbol#tabler-icon-Bell")));
+    }
+
+    [Fact]
+    public void Host_RendersOnce_ForAnAssemblysWholeBatchOfIcons()
+    {
+        // Arrange - a class library whose module initializer registers all its icons while the sprite is on screen
+        var cut = Render<TablerIconSprite>();
+        var spriteSheet = cut.FindComponent<TablerSpriteSheet>();
+        var renderCountBefore = spriteSheet.RenderCount;
+
+        // Act
+        TablerSvgRegistry.RegisterRange(_lateBatchRegistrations);
+
+        // Assert - one render for the batch, not one per icon: in Blazor Server every open circuit
+        // renders the sheet, and each render is a batch sent over its connection
+        cut.WaitForAssertion(() => Assert.All(
+            _lateBatchRegistrations,
+            x => Assert.Single(cut.FindAll($"symbol#{TablerSpriteSheet.GetSymbolId(x.Type)}"))));
+        Assert.Equal(renderCountBefore + 1, spriteSheet.RenderCount);
+    }
+
+    [Fact]
+    public void Host_DoesNotRender_WhenABatchChangesNothing()
+    {
+        // Arrange
+        TablerSvgRegistry.RegisterRange(_unchangedBatchRegistrations);
+        var cut = Render<TablerIconSprite>();
+        var spriteSheet = cut.FindComponent<TablerSpriteSheet>();
+        var renderCountBefore = spriteSheet.RenderCount;
+
+        // Act
+        TablerSvgRegistry.RegisterRange(_unchangedBatchRegistrations);
+
+        // Assert
+        Assert.Equal(renderCountBefore, spriteSheet.RenderCount);
     }
 
     [Fact]
