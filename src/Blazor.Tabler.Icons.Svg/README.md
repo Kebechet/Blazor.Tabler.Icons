@@ -77,6 +77,11 @@ Wrap the content whose icons should use the sprite, usually the layout body:
 
 The `<svg>` itself is unchanged: `fill`, `stroke`, `stroke-width`, `stroke-linecap`/`stroke-linejoin`, `class`, `style` and captured attributes stay on it and inherit into the symbol, so sizing, `currentColor`, `stroke-*` classes and filled vs outline icons behave as in inline mode. What no longer works is CSS that targets the paths themselves (`.tabler-icon path { ... }`): `<use>` renders the symbol in a shadow tree that page selectors do not reach.
 
+Two small differences remain:
+
+- **Clipping.** Each symbol clips to the icon's own 24x24 box, which the inline paths do not. Only a stroke that reaches outside it is affected: a thick `stroke-width` together with an outer `viewBox` larger than 24x24. Such a stroke is clipped in sprite mode.
+- **Anti-aliasing in Chromium.** At fractional icon sizes, edge pixels can differ from inline mode by a few shades (at most 7 of 255 in testing). WebKit and Firefox render identically.
+
 ### Keeping some icons inline
 
 The nearest setting wins: an icon's own `SvgMode`, then the closest cascaded `TablerSvgMode`, then inline.
