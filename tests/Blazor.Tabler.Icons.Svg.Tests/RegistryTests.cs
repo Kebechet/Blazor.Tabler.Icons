@@ -157,7 +157,7 @@ public class RegistryTests
     }
 
     [Fact]
-    public void GetEntries_WhileOtherThreadsRegister_ReturnsASnapshot()
+    public void GetEntries_WhileOtherThreadsRegister_ReturnsAConsistentSnapshot()
     {
         for (var round = 0; round < RoundCount; round++)
         {
@@ -189,11 +189,48 @@ public class RegistryTests
 
                 do
                 {
-                    registry.GetEntries();
+                    var snapshot = registry.GetEntries();
+
+                    // Present before the round started: must stay in every snapshot.
+                    Assert.Contains(snapshot, x => x.IconNumber == _iconNumbers[0]);
+
+                    var snapshotIconNumbers = snapshot
+                        .Select(x => x.IconNumber)
+                        .ToList();
+                    Assert.Equal(snapshotIconNumbers.Distinct().OrderBy(x => x), snapshotIconNumbers);
+
+                    // Written while the snapshot was taken: whatever is in it is complete.
+                    foreach (var (iconNumber, entry) in snapshot)
+                    {
+                        Assert.Equal(GetExpectedEntry(iconNumber), entry);
+                    }
                 }
                 while (!writerDone.IsSet);
             });
+
+            // Assert
+            Assert.Equal(_iconNumbers, registry.GetEntries().Select(x => x.IconNumber));
         }
+    }
+
+    [Fact]
+    public void GetEntries_ReturnsEverySortedEntry_AsASnapshotThatLaterRegistrationsDoNotChange()
+    {
+        // Arrange
+        var registry = new IsolatedRegistry();
+        foreach (var iconNumber in _iconNumbers.Take(3).Reverse())
+        {
+            Register(registry, iconNumber);
+        }
+
+        // Act
+        var snapshot = registry.GetEntries();
+        Register(registry, _iconNumbers[3]);
+
+        // Assert
+        Assert.Equal(_iconNumbers.Take(3), snapshot.Select(x => x.IconNumber));
+        Assert.All(snapshot, x => Assert.Equal(GetExpectedEntry(x.IconNumber), x.Entry));
+        Assert.Equal(_iconNumbers.Take(4), registry.GetEntries().Select(x => x.IconNumber));
     }
 
     private static void Register(IsolatedRegistry registry, int iconNumber)
@@ -279,6 +316,10 @@ public class RegistryTests
         private readonly Action<int, bool, string> _register;
         private readonly Func<int, TablerSvgEntry?> _tryGet;
         private readonly Func<Array> _getEntries;
+        private readonly PropertyInfo _pairIcon;
+        private readonly PropertyInfo _pairEntry;
+        private readonly PropertyInfo _entryIsFilled;
+        private readonly PropertyInfo _entryInner;
 
         public IsolatedRegistry()
         {
@@ -292,6 +333,11 @@ public class RegistryTests
             _getEntries = registryType
                 .GetMethod(nameof(TablerSvgRegistry.GetEntries), BindingFlags.NonPublic | BindingFlags.Static)!
                 .CreateDelegate<Func<Array>>();
+            var pairType = typeof(KeyValuePair<,>).MakeGenericType(iconType, entryType);
+            _pairIcon = pairType.GetProperty(nameof(KeyValuePair<int, int>.Key))!;
+            _pairEntry = pairType.GetProperty(nameof(KeyValuePair<int, int>.Value))!;
+            _entryIsFilled = entryType.GetProperty(nameof(TablerSvgEntry.IsFilled))!;
+            _entryInner = entryType.GetProperty(nameof(TablerSvgEntry.Inner))!;
 
             var iconNumber = Expression.Parameter(typeof(int));
             var icon = Expression.Convert(iconNumber, iconType);
@@ -321,9 +367,18 @@ public class RegistryTests
             _register(iconNumber, isFilled, inner);
         }
 
-        public Array GetEntries()
+        public IReadOnlyList<(int IconNumber, TablerSvgEntry Entry)> GetEntries()
         {
-            return _getEntries();
+            return _getEntries()
+                .Cast<object>()
+                .Select(pair =>
+                {
+                    var entry = _pairEntry.GetValue(pair)!;
+                    return (
+                        Convert.ToInt32(_pairIcon.GetValue(pair)),
+                        new TablerSvgEntry((bool)_entryIsFilled.GetValue(entry)!, (string)_entryInner.GetValue(entry)!));
+                })
+                .ToList();
         }
 
         public TablerSvgEntry? TryGet(int iconNumber)
